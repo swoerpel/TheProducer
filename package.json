@@ -1,0 +1,22 @@
+{
+  "name": "theproducer",
+  "version": "1.0.0",
+  "description": "image producing rest api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swoerpel/TheProducer.git"
+  },
+  "author": "steven woerpel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swoerpel/TheProducer/issues"
+  },
+  "homepage": "https://github.com/swoerpel/TheProducer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
