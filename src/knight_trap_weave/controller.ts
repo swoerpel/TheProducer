@@ -27,10 +27,17 @@ export class KnightTrapWeave {
         const jump_data = this.weave.Jump(this.params.draw.count)
         this.weave.RefreshGrid();
         this.weave.RefreshKnight();
-        jump_data.forEach((rect:Rect) =>{
-            this.canvas.rect(rect.w, rect.h).fill(rect.color).move(rect.x,rect.y);
+        jump_data.forEach((shapes: any) =>{
+            shapes.knight.forEach((k: Rect) =>{
+                this.canvas.rect(k.w, k.h)
+                .fill(k.color)
+                .move(k.x,k.y);
+            })
+            const point_ary = shapes.weave.map((w:any)=>{
+                return [w.x,w.y]
+            })
+            this.canvas.polyline(point_ary).fill('none').stroke({ width: 5, color:'black' })
         })
-        
         return this.canvas.node.outerHTML
     }
 

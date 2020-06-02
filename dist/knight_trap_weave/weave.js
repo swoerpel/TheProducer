@@ -28,7 +28,6 @@ class Weave {
             this.knight_x = Math.floor(Math.random() * this.params.grid.cols);
             this.knight_y = Math.floor(Math.random() * this.params.grid.rows);
         }
-        console.log('kxy', this.knight_x, this.knight_y);
         for (let i = 0; i < 4; i++) {
             const muls = Array.from(i.toString(2).padStart(2, '0')).map((m) => parseInt(m));
             const x_mul = muls[0] ? -1 : 1;
@@ -67,31 +66,31 @@ class Weave {
         // this.grid.forEach((row) =>row.forEach((cell)=>console.log(cell)));
     }
     Jump(N = 1) {
-        console.log('N', N);
         let shapes = [];
         for (let i = 0; i < N; i++) {
             const options = this.calculateNext();
-            console.log("options->", options);
             if (options.length == 0) {
                 this.jump_count = 0;
                 break;
             }
+            let jump_frame = {
+                knight: [],
+                weave: [],
+            };
             // if(this.params.draw.jump_options.on)
             // this.drawOptions(options);
-            console.log(this.params.draw.knight.on);
             if (this.params.draw.knight.on)
-                shapes.push(this.drawKnight());
-            let weave_path = [];
+                jump_frame.knight.push(this.drawKnight());
             if (this.params.draw.weave.on)
-                weave_path = this.drawWeave();
-            console.log('weave_path', weave_path);
+                jump_frame.weave = this.drawWeave();
+            shapes.push(jump_frame);
             this.rotateWeaveQueue();
             let next_jump_index = this.nextJumpIndex(options);
             this.knight_x = options[next_jump_index].x;
             this.knight_y = options[next_jump_index].y;
             this.grid[this.knight_x][this.knight_y].value = -1;
             this.jump_count = (this.jump_count + 1) % this.params.color.domain;
-            this.printWeaveQueue();
+            // this.printWeaveQueue()
         }
         return shapes;
     }
@@ -119,7 +118,6 @@ class Weave {
     }
     drawKnight() {
         let rect;
-        console.log("this.knight", this.knight_x, this.knight_y);
         if (this.params.draw.knight.mode === 'squares') {
             rect = {
                 x: this.grid[this.knight_x][this.knight_y].x,
@@ -140,7 +138,6 @@ class Weave {
         }
         let cv = helpers_1.arrSum(this.grid.map((row) => row.map((cell) => cell.value))) / this.start_grid_sum;
         rect.color = this.color_machine(cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex();
-        console.log('rect', rect);
         return rect;
     }
     drawWeave() {
@@ -150,9 +147,8 @@ class Weave {
                 y: this.grid[cell_index.x][cell_index.y].cy,
             };
         }), this.params.weave.smooth.iter_end, this.params.weave.smooth.iter_start, this.params.weave.smooth.ratio).map((p, index) => {
-            console.log(p);
             let cv = helpers_1.arrSum(this.grid.map((row) => row.map((cell) => cell.value))) / this.start_grid_sum;
-            return Object.assign(Object.assign({}, p), { color: this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex() });
+            return Object.assign(Object.assign({}, p), { color: 'black' });
         });
     }
     drawOptions(options) {
