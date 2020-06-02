@@ -148,7 +148,7 @@ class Weave {
             };
         }), this.params.weave.smooth.iter_end, this.params.weave.smooth.iter_start, this.params.weave.smooth.ratio).map((p, index) => {
             let cv = helpers_1.arrSum(this.grid.map((row) => row.map((cell) => cell.value))) / this.start_grid_sum;
-            return Object.assign(Object.assign({}, p), { color: 'black' });
+            return Object.assign(Object.assign({}, p), { color: this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex() });
         });
     }
     drawOptions(options) {

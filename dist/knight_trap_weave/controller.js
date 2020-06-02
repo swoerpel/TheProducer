@@ -39,10 +39,18 @@ class KnightTrapWeave {
                         .fill(k.color)
                         .move(k.x, k.y);
                 });
-                const point_ary = shapes.weave.map((w) => {
-                    return [w.x, w.y];
+                this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
+                    .fill('none')
+                    .stroke({
+                    width: 45,
+                    color: 'black'
                 });
-                this.canvas.polyline(point_ary).fill('none').stroke({ width: 5, color: 'black' });
+                this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
+                    .fill('none')
+                    .stroke({
+                    width: 40,
+                    color: shapes.weave[0].color
+                });
             });
             return this.canvas.node.outerHTML;
         };

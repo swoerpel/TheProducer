@@ -178,7 +178,7 @@ export class Weave{
             let cv = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value))) / this.start_grid_sum;
             return{
                 ...p,
-                color: 'black',//this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex()
+                color: this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex()
             }
         });
     }
