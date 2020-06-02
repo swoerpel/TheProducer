@@ -14,14 +14,10 @@ export class KnightTrapWeave {
     weave: Weave;
     color_palettes: any = {}; 
     constructor(private params: any){
-
         this.weave = new Weave(
             this.params, 
             this.createColorMachine()
         );
-        this.weave.RefreshKnight();
-        this.weave.RefreshGrid();
-
         registerWindow(window, document);
         this.canvas = SVG(document.documentElement);
     }
@@ -29,10 +25,8 @@ export class KnightTrapWeave {
     generate = () => {
         const jump_data = this.weave.Jump(this.params.draw.count)
         jump_data.forEach((rect:Rect) =>{
-            console.log(rect.color)
             this.canvas.rect(rect.w, rect.h).fill(rect.color).move(rect.x,rect.y);
         })
-        
         return this.canvas.node.outerHTML
     }
 

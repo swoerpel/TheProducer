@@ -34,7 +34,6 @@ class KnightTrapWeave {
         this.generate = () => {
             const jump_data = this.weave.Jump(this.params.draw.count);
             jump_data.forEach((rect) => {
-                console.log(rect.color);
                 this.canvas.rect(rect.w, rect.h).fill(rect.color).move(rect.x, rect.y);
             });
             return this.canvas.node.outerHTML;
@@ -56,8 +55,6 @@ class KnightTrapWeave {
             }
         };
         this.weave = new weave_1.Weave(this.params, this.createColorMachine());
-        this.weave.RefreshKnight();
-        this.weave.RefreshGrid();
         registerWindow(window, document);
         this.canvas = SVG(document.documentElement);
     }
