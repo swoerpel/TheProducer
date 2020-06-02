@@ -7,8 +7,7 @@ import { chromotome_palettes } from './chromotome';
 
 const { createSVGWindow } = require('svgdom');
 const { SVG, registerWindow } = require('@svgdotjs/svg.js');
-const window = createSVGWindow()
-const document = window.document
+
 export class KnightTrapWeave {
     canvas:any;
     weave: Weave;
@@ -18,15 +17,20 @@ export class KnightTrapWeave {
             this.params, 
             this.createColorMachine()
         );
+        const window = createSVGWindow()
+        const document = window.document
         registerWindow(window, document);
         this.canvas = SVG(document.documentElement);
     }
 
     generate = () => {
         const jump_data = this.weave.Jump(this.params.draw.count)
+        this.weave.RefreshGrid();
+        this.weave.RefreshKnight();
         jump_data.forEach((rect:Rect) =>{
             this.canvas.rect(rect.w, rect.h).fill(rect.color).move(rect.x,rect.y);
         })
+        
         return this.canvas.node.outerHTML
     }
 

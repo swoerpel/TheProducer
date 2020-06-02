@@ -25,14 +25,14 @@ const weave_1 = require("./weave");
 const chromotome_1 = require("./chromotome");
 const { createSVGWindow } = require('svgdom');
 const { SVG, registerWindow } = require('@svgdotjs/svg.js');
-const window = createSVGWindow();
-const document = window.document;
 class KnightTrapWeave {
     constructor(params) {
         this.params = params;
         this.color_palettes = {};
         this.generate = () => {
             const jump_data = this.weave.Jump(this.params.draw.count);
+            this.weave.RefreshGrid();
+            this.weave.RefreshKnight();
             jump_data.forEach((rect) => {
                 this.canvas.rect(rect.w, rect.h).fill(rect.color).move(rect.x, rect.y);
             });
@@ -55,6 +55,8 @@ class KnightTrapWeave {
             }
         };
         this.weave = new weave_1.Weave(this.params, this.createColorMachine());
+        const window = createSVGWindow();
+        const document = window.document;
         registerWindow(window, document);
         this.canvas = SVG(document.documentElement);
     }
