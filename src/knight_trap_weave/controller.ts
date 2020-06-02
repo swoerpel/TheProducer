@@ -13,8 +13,6 @@ export class KnightTrapWeave {
     weave: Weave;
     color_palettes: any = {}; 
     cell_width = this.params.canvas.width / this.params.grid.cols;
-    weave_width = this.cell_width * ((this.params.draw.weave.width == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width);
-    weave_border_width = this.cell_width * this.params.draw.weave.border.width;
     knight_border_width = this.cell_width * this.params.draw.knight.border.width / 2;
 
     constructor(private params: any){
@@ -45,30 +43,27 @@ export class KnightTrapWeave {
     drawBackground(){
         if(this.params.draw.background.on){
             this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
-            .attr('fill', 'black')
+            .attr('fill', this.params.draw.background.color)
         }
     }
 
     drawWeave = (shapes: any) => {
-        if(this.params.draw.knight.border.on){
+        const weave_width = this.cell_width * ((this.params.draw.weave.width == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width);
+        const weave_border_width = this.cell_width * this.params.draw.weave.border.width;
+        if(this.params.draw.weave.border.on){
             this.canvas.polyline(shapes.weave.map((w:any)=>[w.x,w.y]))
             .fill('none')
             .stroke({ 
-                width: this.weave_width + this.weave_border_width, 
+                width: weave_width + weave_border_width, 
                 color: this.params.draw.weave.border.color
             });
         }
-
-        // endcap
-        // this.canvas.circle(this.weave_width)
-        // .fill(shapes.weave[0].color)
-        // .move(shapes.weave[0].x,shapes.weave[0].y);
 
         // weave
         this.canvas.polyline(shapes.weave.map((w:any)=>[w.x,w.y]))
         .fill('none')
         .stroke({ 
-            width: this.weave_width, 
+            width: weave_width, 
             color: shapes.weave[0].color 
         });
     }
