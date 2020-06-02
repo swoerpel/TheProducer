@@ -30,28 +30,40 @@ class KnightTrapWeave {
         this.params = params;
         this.color_palettes = {};
         this.generate = () => {
-            const jump_data = this.weave.Jump(this.params.draw.count);
-            this.weave.RefreshGrid();
-            this.weave.RefreshKnight();
-            jump_data.forEach((shapes) => {
-                shapes.knight.forEach((k) => {
-                    this.canvas.rect(k.w, k.h)
-                        .fill(k.color)
-                        .move(k.x, k.y);
+            const cell_width = this.params.canvas.width / this.params.grid.cols;
+            const weave_width = cell_width * ((this.params.draw.weave.width == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width);
+            const weave_border_width = cell_width * this.params.draw.weave.border.width;
+            const knight_border_width = cell_width * this.params.draw.knight.border.width / 2;
+            console.log('knight_border_width', knight_border_width);
+            for (let i = 0; i < this.params.draw.trap_count; i++) {
+                const jump_data = this.weave.Jump(this.params.draw.jump.count);
+                this.weave.RefreshGrid();
+                this.weave.RefreshKnight();
+                jump_data.forEach((shapes) => {
+                    shapes.knight.forEach((k) => {
+                        this.canvas.rect(k.w, k.h)
+                            .attr('fill', this.params.draw.knight.border.color)
+                            .attr('fill-opacity', this.params.draw.knight.border.alpha)
+                            .move(k.x, k.y);
+                        this.canvas.rect(k.w - knight_border_width, k.h - knight_border_width)
+                            .attr('fill', k.color)
+                            .attr('fill-opacity', this.params.draw.knight.alpha)
+                            .move(k.x + knight_border_width, k.y + knight_border_width);
+                    });
+                    this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
+                        .fill('none')
+                        .stroke({
+                        width: weave_width + weave_border_width,
+                        color: this.params.draw.weave.border.color
+                    });
+                    this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
+                        .fill('none')
+                        .stroke({
+                        width: weave_width,
+                        color: shapes.weave[0].color
+                    });
                 });
-                this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
-                    .fill('none')
-                    .stroke({
-                    width: 45,
-                    color: 'black'
-                });
-                this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
-                    .fill('none')
-                    .stroke({
-                    width: 40,
-                    color: shapes.weave[0].color
-                });
-            });
+            }
             return this.canvas.node.outerHTML;
         };
         this.createColorMachine = () => {
