@@ -32,7 +32,7 @@ export class KnightTrapWeave {
 
     generate = () => {
         for(let i = 0; i < this.params.draw.trap_count; i++){
-            this.weave.Jump(this.params.draw.jump.count)
+            this.weave.Jump(this.params.jump.count)
                 .forEach((shapes: any) =>{
                 this.drawKnight(shapes);
                 this.drawWeave(shapes);

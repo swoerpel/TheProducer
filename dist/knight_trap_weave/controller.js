@@ -35,7 +35,7 @@ class KnightTrapWeave {
         this.knight_border_width = this.cell_width * this.params.draw.knight.border.width / 2;
         this.generate = () => {
             for (let i = 0; i < this.params.draw.trap_count; i++) {
-                this.weave.Jump(this.params.draw.jump.count)
+                this.weave.Jump(this.params.jump.count)
                     .forEach((shapes) => {
                     this.drawKnight(shapes);
                     this.drawWeave(shapes);

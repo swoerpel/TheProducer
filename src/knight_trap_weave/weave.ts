@@ -119,7 +119,7 @@ export class Weave{
             this.knight_x = options[next_jump_index].x
             this.knight_y = options[next_jump_index].y
             this.grid[this.knight_x][this.knight_y].value = -1;
-            this.jump_count = (this.jump_count + 1) % this.params.color.domain;
+            this.jump_count = this.jump_count + 1
             // this.printWeaveQueue()
         }
         return shapes;
@@ -172,6 +172,9 @@ export class Weave{
             }
         }
         let cv = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value))) / this.start_grid_sum;
+        // let cv = this.jump_count / this.params.color.domain;
+        // let col = this.color_machine(1 - cv).rgba()
+        // col[3] = this.params.jump_options.alpha * 255;
         rect.color = this.color_machine(cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex()
         return rect;
     }
@@ -188,7 +191,8 @@ export class Weave{
             this.params.weave.smooth.iter_start,
             this.params.weave.smooth.ratio,   
         ).map((p: any, index: number)=>{
-            let cv = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value))) / this.start_grid_sum;
+            // let cv = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value))) / this.start_grid_sum;
+            let cv = (this.jump_count % this.params.color.domain) / this.params.color.domain;
             return{
                 ...p,
                 color: this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex()
@@ -197,26 +201,26 @@ export class Weave{
     }
 
     drawOptions(options: any){
-        this.setOptionsColors();
-        options.map((op: any) =>{
-            if(this.params.jump_options.shape == 'circle'){
-                // this.graphic.circle(
-                //     this.grid[op.x][op.y].cx, 
-                //     this.grid[op.x][op.y].cy, 
-                //     this.cell_width * this.params.jump_options.radius, 
-                // )
-            }
-            if(this.params.jump_options.shape == 'rect'){
-                let w = this.cell_width * this.params.jump_options.radius
-                let h = this.cell_height * this.params.jump_options.radius
-                // this.graphic.rect(
-                //     this.grid[op.x][op.y].cx, 
-                //     this.grid[op.x][op.y].cy, 
-                //     w - w/2,
-                //     h - h/2,
-                // )
-            }
-        })
+        // this.setOptionsColors();
+        // options.map((op: any) =>{
+        //     if(this.params.jump_options.shape == 'circle'){
+        //         // this.graphic.circle(
+        //         //     this.grid[op.x][op.y].cx, 
+        //         //     this.grid[op.x][op.y].cy, 
+        //         //     this.cell_width * this.params.jump_options.radius, 
+        //         // )
+        //     }
+        //     if(this.params.jump_options.shape == 'rect'){
+        //         let w = this.cell_width * this.params.jump_options.radius
+        //         let h = this.cell_height * this.params.jump_options.radius
+        //         // this.graphic.rect(
+        //         //     this.grid[op.x][op.y].cx, 
+        //         //     this.grid[op.x][op.y].cy, 
+        //         //     w - w/2,
+        //         //     h - h/2,
+        //         // )
+        //     }
+        // })
     }
 
     nextJumpIndex(options: any){
