@@ -13,19 +13,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const controller_1 = require("./knight_trap_weave/controller");
+const body_parser_1 = __importDefault(require("body-parser"));
 const { convert } = require('convert-svg-to-png');
-const knight_trap_weave_1 = require("./knight_trap_weave");
 const app = express_1.default();
-const port = 8080; // default port to listen
-// define a route handler for the default home page
+const port = 8080;
+app.use(body_parser_1.default.json());
 app.get("/knight_trap_weave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const ktw = new knight_trap_weave_1.KnightTrapWeave();
+    const ktw = new controller_1.KnightTrapWeave(req.body);
     const svg = ktw.generate();
-    const png = yield convert(svg, { width: 640, height: 640 });
+    const png = yield convert(svg, {
+        width: req.body.canvas.width,
+        height: req.body.canvas.width
+    });
     res.set('Content-Type', 'image/png');
     res.send(png);
 }));
-// start the Express server
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });
