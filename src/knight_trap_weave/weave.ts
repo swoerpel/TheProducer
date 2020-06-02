@@ -24,24 +24,33 @@ export class Weave{
         private params : any,
         private color_machine: any
     ){
-        this.RefreshKnight();
-        this.RefreshGrid();
-        this.weave_queue = new Array(this.params.weave.queue_length).fill({x:this.knight_x,y:this.knight_y});
+        this.Refresh();
     }
 
+    public Refresh(): void{
+        this.RefreshKnightPosition();
+        this.RefreshKnightOffsets();
+        this.RefreshGrid();
+        this.RefreshQueue();
+    }
 
-
-    RefreshKnight(){
-        if(this.params.knight.start === 'center')  {
+    RefreshKnightPosition(){
+        if(this.params.knight.init.mode === 'center')  {
             this.knight_x = Math.floor(this.params.grid.cols / 2)
             this.knight_y = Math.floor(this.params.grid.rows / 2)
-        }else if(this.params.knight.start === 'start'){
-            this.knight_x = 0;
-            this.knight_y = 0;
-        }else if(this.params.knight.start === 'random'){
+        }else if(this.params.knight.init.mode === 'random'){
             this.knight_x = Math.floor(Math.random() * this.params.grid.cols)
             this.knight_y = Math.floor(Math.random() * this.params.grid.rows)
+        }else if(this.params.knight.init.mode === 'custom'){
+            this.knight_x = this.params.knight.init.x;
+            this.knight_y = this.params.knight.init.y;
+        }else{
+            this.knight_x = 0;
+            this.knight_y = 0;
         }
+    }
+
+    RefreshKnightOffsets(){
         for(let i = 0; i < 4; i++){
             const muls = Array.from(i.toString(2).padStart(2,'0')).map((m) => parseInt(m));
             const x_mul = muls[0] ? -1 : 1;
@@ -62,10 +71,11 @@ export class Weave{
             let row: Cell[] = [];
             for(let j = 0; j < this.params.grid.rows; j++){
                 let value: number;
-                if(this.params.grid.random)
+                if(this.params.grid.random){
                     value = Math.floor(Math.random() * this.params.grid.max_value)                
-                else
-                    value = this.cell_count % this.params.grid.max_value,
+                }else{
+                    value = this.cell_count % this.params.grid.max_value
+                }
                 row.push({
                     index: this.cell_count++,
                     value: value,
@@ -78,7 +88,10 @@ export class Weave{
             this.grid.push(row)
         }
         this.start_grid_sum = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value)))
-        // this.grid.forEach((row) =>row.forEach((cell)=>console.log(cell)));
+    }
+
+    RefreshQueue(){
+        this.weave_queue = new Array(this.params.weave.queue_length).fill({x:this.knight_x,y:this.knight_y});
     }
 
     Jump(N:number = 1): Rect[]{
@@ -146,16 +159,16 @@ export class Weave{
                 y:this.grid[this.knight_x][this.knight_y].y, 
                 w:this.cell_width, 
                 h:this.cell_height,
-                color: 'red',
+                color: '',
             }
         }
         if(this.params.draw.knight.mode === 'bars') {
-            rect ={
+            rect = {
                 x: this.grid[this.knight_x][this.knight_y].x, 
                 y: this.grid[this.knight_x][this.knight_y].y, 
                 w: this.cell_width, 
-                h: this.params.canvas.height - this.grid[this.knight_x][this.knight_y].y,
-                color: 'red'
+                h: this.cell_height * this.grid[this.knight_x][this.knight_y].y,
+                color: ''
             }
         }
         let cv = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value))) / this.start_grid_sum;
