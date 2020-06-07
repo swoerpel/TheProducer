@@ -100,7 +100,7 @@ export class Weave{
         this.weave_queue = new Array(this.params.weave.queue_length).fill({x:this.knight_x,y:this.knight_y});
     }
 
-    Jump(N:number = 1): Rect[]{
+    Jump(N:number = 1): any[]{
         let shapes: any[] = [];
         for(let i = 0; i < N; i++){
             let jump_frame: any = {
