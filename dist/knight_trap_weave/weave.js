@@ -98,20 +98,12 @@ class Weave {
                 jump_frame.knight.push(this.drawKnight());
             if (this.params.draw.weave.on)
                 jump_frame.weave = this.drawWeave();
-            // console.log(i,'jump_frame.weave',jump_frame.weave)
             shapes.push(jump_frame);
             const options = this.calculateNext();
             if (options.length == 0) {
-                console.log("direction on trap", this.direction);
-                // console.log('shapes',shapes)
-                const offset = {
-                    x: (this.direction.x < 0 ? 1 : -1) * this.cell_width / 2,
-                    y: (this.direction.y < 0 ? -1 : 1) * this.cell_height / 2,
-                };
                 shapes[shapes.length - 1].weave.push({
-                    x: (this.knight_x) * this.cell_width - offset.x,
-                    y: (this.knight_y) * this.cell_height - offset.y,
-                    color: 'black',
+                    x: (this.knight_x) * this.cell_width + this.cell_width / 2,
+                    y: (this.knight_y) * this.cell_height + this.cell_height / 2,
                 });
                 this.jump_count = 0;
                 break;
@@ -127,15 +119,6 @@ class Weave {
             this.weave_queue.shift();
         }
         return shapes;
-    }
-    setOptionsColors() {
-        // this.graphic.strokeWeight(0);
-        // // this.graphic.fill(this.params.weave.stroke_weight);
-        // let cv = this.jump_count / this.params.color.domain;
-        // // let col = this.color_machine(1 - cv).rgba()
-        // col[3] = this.params.jump_options.alpha * 255;
-        // col[3] = 150
-        // this.graphic.fill(col);
     }
     printWeaveQueue() {
         console.log('weave queue');

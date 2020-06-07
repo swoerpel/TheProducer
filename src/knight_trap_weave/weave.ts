@@ -116,14 +116,9 @@ export class Weave{
             shapes.push(jump_frame);
             const options = this.calculateNext()
             if(options.length == 0){
-                const offset = {
-                    x: (this.direction.x < 0 ? 1 : -1) * this.cell_width / 2,
-                    y: (this.direction.y < 0 ? -1 : 1) * this.cell_height / 2,
-                }
                 shapes[shapes.length - 1].weave.push({
-                    x: (this.knight_x) * this.cell_width - offset.x,
-                    y: (this.knight_y) * this.cell_height - offset.y,
-                    color: 'black',
+                    x: (this.knight_x) * this.cell_width + this.cell_width / 2,
+                    y: (this.knight_y) * this.cell_height + this.cell_height / 2,
                 })
                 this.jump_count = 0;
                 break;
