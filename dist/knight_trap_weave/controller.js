@@ -32,8 +32,6 @@ class KnightTrapWeave {
         this.cell_width = this.params.canvas.width / this.params.grid.cols;
         this.cell_height = this.params.canvas.height / this.params.grid.rows;
         this.knight_border_width = this.cell_width * this.params.draw.knight.border.width / 2;
-        this.weave_width = this.cell_width * ((this.params.draw.weave.width == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width);
-        this.weave_border_width = this.cell_width * this.params.draw.weave.border.width;
         this.generate = () => {
             for (let i = 0; i < this.params.draw.trap_count; i++) {
                 const jumps = this.weave.Jump(this.params.jump.count);
@@ -41,31 +39,33 @@ class KnightTrapWeave {
                     this.drawKnight(shapes);
                     this.drawWeave(shapes, index);
                 });
-                const first_point = {
-                    x: jumps[0].knight[0].x + this.cell_width / 2 - this.weave_width / 2,
-                    y: jumps[0].knight[0].y + this.cell_height / 2 - this.weave_width / 2,
-                    color: jumps[0].weave[0].color,
-                };
-                const last_point = jumps[jumps.length - 1].weave[jumps[jumps.length - 1].weave.length - 1];
-                console.log('first_last', first_point, last_point);
-                last_point.x -= this.weave_width / 2,
-                    last_point.y -= this.weave_width / 2,
-                    this.canvas.circle(this.weave_width)
-                        .move(first_point.x, first_point.y)
-                        .fill('white');
-                this.canvas.circle(this.weave_width)
-                    .move(last_point.x, last_point.y)
-                    .fill('white');
+                this.appendWeaveEndCaps(jumps);
                 this.weave.Refresh();
             }
             return this.canvas.node.outerHTML;
+        };
+        this.appendWeaveEndCaps = (jumps) => {
+            const first_point = {
+                x: jumps[0].weave[0].x + this.cell_width / 2 - this.weave_width / 2,
+                y: jumps[0].weave[0].y + this.cell_height / 2 - this.weave_width / 2,
+                color: jumps[0].weave[0].color,
+            };
+            const last_point = jumps[jumps.length - 1].weave[jumps[jumps.length - 1].weave.length - 1];
+            last_point.x -= this.weave_width / 2,
+                last_point.y -= this.weave_width / 2,
+                this.canvas.circle(this.weave_width)
+                    .move(first_point.x, first_point.y)
+                    .fill(this.params.draw.background.color);
+            this.canvas.circle(this.weave_width)
+                .move(last_point.x, last_point.y)
+                .fill(this.params.draw.background.color);
         };
         this.drawWeave = (shapes, index) => {
             if (this.params.draw.weave.border.on) {
                 this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
                     .fill('none')
                     .stroke({
-                    width: this.weave_width + this.weave_border_width,
+                    width: this.weave_width * this.cell_width + this.weave_border_width,
                     color: this.params.draw.weave.border.color
                 });
             }
@@ -73,9 +73,14 @@ class KnightTrapWeave {
             this.canvas.polyline(shapes.weave.map((w) => [w.x, w.y]))
                 .fill('none')
                 .stroke({
-                width: this.weave_width,
+                width: this.weave_width * this.cell_width,
                 color: shapes.weave[0].color
             });
+            if (this.params.draw.weave.width.dynamic) {
+                this.weave_width += this.params.draw.weave.width.step;
+                if (this.weave_width > this.params.draw.weave.width.max)
+                    this.weave_width = this.params.draw.weave.width.min;
+            }
         };
         this.drawKnight = (shapes) => {
             shapes.knight.forEach((k) => {
@@ -108,6 +113,8 @@ class KnightTrapWeave {
             }
         };
         this.weave = new weave_1.Weave(this.params, this.createColorMachine());
+        this.weave_width = this.cell_width * ((this.params.draw.weave.width.init == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width.init);
+        this.weave_border_width = this.cell_width * this.params.draw.weave.border.width;
         const window = createSVGWindow();
         const document = window.document;
         registerWindow(window, document);
