@@ -31,23 +31,17 @@ export class KnightTrapWeave {
     generate = () => {
         for(let i = 0; i < this.params.draw.trap_count; i++){
             this.weave.Jump(this.params.jump.count)
-                .forEach((shapes: any) =>{
+                .forEach((shapes: any, index: number) =>{
                 this.drawKnight(shapes);
-                this.drawWeave(shapes);
+                this.drawWeave(shapes,index);
             });
+        
             this.weave.Refresh();
         }
         return this.canvas.node.outerHTML
     }
 
-    drawBackground(){
-        if(this.params.draw.background.on){
-            this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
-            .attr('fill', this.params.draw.background.color)
-        }
-    }
-
-    drawWeave = (shapes: any) => {
+    drawWeave = (shapes: any, index: number) => {
         const weave_width = this.cell_width * ((this.params.draw.weave.width == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width);
         const weave_border_width = this.cell_width * this.params.draw.weave.border.width;
         if(this.params.draw.weave.border.on){
@@ -82,6 +76,13 @@ export class KnightTrapWeave {
             .attr('fill-opacity', this.params.draw.knight.alpha)
             .move(k.x + this.knight_border_width,k.y + this.knight_border_width);
         });
+    }
+
+    drawBackground(){
+        if(this.params.draw.background.on){
+            this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
+            .attr('fill', this.params.draw.background.color)
+        }
     }
 
     createColorMachine = () => {

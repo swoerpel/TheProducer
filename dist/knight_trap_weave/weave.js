@@ -9,6 +9,10 @@ class Weave {
         this.grid = [];
         this.jump_count = 0;
         this.cell_count = 0;
+        this.direction = {
+            x: 0,
+            y: 0
+        };
         this.knightStartLUT = {};
         this.knight_jump_offsets = [];
         this.Refresh();
@@ -75,6 +79,8 @@ class Weave {
             this.grid.push(row);
         }
         this.start_grid_sum = helpers_1.arrSum(this.grid.map((row) => row.map((cell) => cell.value)));
+        if (this.params.grid.increment_max_value)
+            this.params.grid.max_value += this.params.grid.max_value_step;
     }
     RefreshQueue() {
         this.weave_queue = new Array(this.params.weave.queue_length).fill({ x: this.knight_x, y: this.knight_y });
@@ -82,11 +88,6 @@ class Weave {
     Jump(N = 1) {
         let shapes = [];
         for (let i = 0; i < N; i++) {
-            const options = this.calculateNext();
-            if (options.length == 0) {
-                this.jump_count = 0;
-                break;
-            }
             let jump_frame = {
                 knight: [],
                 weave: [],
@@ -97,14 +98,33 @@ class Weave {
                 jump_frame.knight.push(this.drawKnight());
             if (this.params.draw.weave.on)
                 jump_frame.weave = this.drawWeave();
+            // console.log(i,'jump_frame.weave',jump_frame.weave)
             shapes.push(jump_frame);
-            this.rotateWeaveQueue();
+            const options = this.calculateNext();
+            if (options.length == 0) {
+                console.log("direction on trap", this.direction);
+                // console.log('shapes',shapes)
+                const offset = {
+                    x: (this.direction.x < 0 ? 1 : -1) * this.cell_width / 2,
+                    y: (this.direction.y < 0 ? -1 : 1) * this.cell_height / 2,
+                };
+                shapes[shapes.length - 1].weave.push({
+                    x: (this.knight_x) * this.cell_width - offset.x,
+                    y: (this.knight_y) * this.cell_height - offset.y,
+                    color: 'black',
+                });
+                this.jump_count = 0;
+                break;
+            }
             let next_jump_index = this.nextJumpIndex(options);
+            this.direction.x = options[next_jump_index].x - this.knight_x;
+            this.direction.y = options[next_jump_index].y - this.knight_y;
             this.knight_x = options[next_jump_index].x;
             this.knight_y = options[next_jump_index].y;
             this.grid[this.knight_x][this.knight_y].value = -1;
             this.jump_count = this.jump_count + 1;
-            // this.printWeaveQueue()
+            this.weave_queue.push({ x: this.knight_x, y: this.knight_y });
+            this.weave_queue.shift();
         }
         return shapes;
     }
@@ -116,13 +136,6 @@ class Weave {
         // col[3] = this.params.jump_options.alpha * 255;
         // col[3] = 150
         // this.graphic.fill(col);
-    }
-    rotateWeaveQueue() {
-        this.weave_queue.push({
-            x: this.knight_x,
-            y: this.knight_y,
-        });
-        this.weave_queue.shift();
     }
     printWeaveQueue() {
         console.log('weave queue');

@@ -34,15 +34,15 @@ class KnightTrapWeave {
         this.generate = () => {
             for (let i = 0; i < this.params.draw.trap_count; i++) {
                 this.weave.Jump(this.params.jump.count)
-                    .forEach((shapes) => {
+                    .forEach((shapes, index) => {
                     this.drawKnight(shapes);
-                    this.drawWeave(shapes);
+                    this.drawWeave(shapes, index);
                 });
                 this.weave.Refresh();
             }
             return this.canvas.node.outerHTML;
         };
-        this.drawWeave = (shapes) => {
+        this.drawWeave = (shapes, index) => {
             const weave_width = this.cell_width * ((this.params.draw.weave.width == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width);
             const weave_border_width = this.cell_width * this.params.draw.weave.border.width;
             if (this.params.draw.weave.border.on) {
