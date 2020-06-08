@@ -78,7 +78,7 @@ class KnightTrapWeave {
                 color: shapes.weave[0].color,
                 opacity: this.params.weave.alpha,
             });
-            if (this.params.weave.width.dynamic) {
+            if (this.params.weave.width.dynamic && (index % this.params.weave.width.oss_freq == 0)) {
                 this.weave_width += this.params.weave.width.step;
                 if (this.weave_width > this.params.weave.width.max)
                     this.weave_width = this.params.weave.width.min;
