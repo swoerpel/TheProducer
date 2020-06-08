@@ -14,7 +14,7 @@ export class KnightTrapWeave {
     color_palettes: any = {}; 
     cell_width = this.params.canvas.width / this.params.grid.cols;
     cell_height = this.params.canvas.height / this.params.grid.rows;
-    knight_border_width = this.cell_width * this.params.draw.knight.border.width / 2;
+    knight_border_width = this.cell_width * this.params.knight.border.width / 2;
     weave_width: number;
     weave_border_width: number;
     constructor(private params: any){
@@ -22,8 +22,8 @@ export class KnightTrapWeave {
             this.params, 
             this.createColorMachine()
         );
-        this.weave_width = this.cell_width * ((this.params.draw.weave.width.init == 1.414) ? Math.sqrt(2) : this.params.draw.weave.width.init);
-        this.weave_border_width = this.cell_width * this.params.draw.weave.border.width;
+        this.weave_width = this.cell_width * ((this.params.weave.width.init == 1.414) ? Math.sqrt(2) : this.params.weave.width.init);
+        this.weave_border_width = this.cell_width * this.params.weave.border.width;
         const window = createSVGWindow()
         const document = window.document
         registerWindow(window, document);
@@ -32,13 +32,13 @@ export class KnightTrapWeave {
     }
 
     generate = () => {
-        for(let i = 0; i < this.params.draw.trap_count; i++){
+        for(let i = 0; i < this.params.trap_count; i++){
             const jumps = this.weave.Jump(this.params.jump.count)
             jumps.forEach((shapes: any, index: number) =>{
                 this.drawKnight(shapes);
                 this.drawWeave(shapes,index);
             });  
-            this.appendWeaveEndCaps(jumps)
+            // this.appendWeaveEndCaps(jumps)
             this.weave.Refresh();
         }
         return this.canvas.node.outerHTML
@@ -55,36 +55,38 @@ export class KnightTrapWeave {
         last_point.y -= this.weave_width / 2,
         this.canvas.circle(this.weave_width)
             .move(first_point.x,first_point.y)
-            .fill(this.params.draw.background.color)
+            .fill(this.params.background.color)
 
         this.canvas.circle(this.weave_width)
             .move(last_point.x,last_point.y)
-            .fill(this.params.draw.background.color)
+            .fill(this.params.background.color)
     }
 
 
     drawWeave = (shapes: any, index: number) => {
 
-        if(this.params.draw.weave.border.on){
+        if(this.params.weave.border.on){
             this.canvas.polyline(shapes.weave.map((w:any)=>[w.x,w.y]))
             .fill('none')
             .stroke({ 
                 width: this.weave_width * this.cell_width + this.weave_border_width, 
-                color: this.params.draw.weave.border.color
+                color: this.params.weave.border.color
             });
         }
 
         // weave
         this.canvas.polyline(shapes.weave.map((w:any)=>[w.x,w.y]))
         .fill('none')
+        .attr('fill-opacity',0.5)
         .stroke({ 
             width: this.weave_width * this.cell_width, 
-            color: shapes.weave[0].color 
+            color: shapes.weave[0].color ,
+            opacity: this.params.weave.alpha,
         });
-        if(this.params.draw.weave.width.dynamic){
-            this.weave_width += this.params.draw.weave.width.step
-            if(this.weave_width > this.params.draw.weave.width.max)
-                this.weave_width = this.params.draw.weave.width.min;
+        if(this.params.weave.width.dynamic){
+            this.weave_width += this.params.weave.width.step
+            if(this.weave_width > this.params.weave.width.max)
+                this.weave_width = this.params.weave.width.min;
         }
     }
 
@@ -93,21 +95,21 @@ export class KnightTrapWeave {
             // need to draw border as wire frame
             // drawing entire rect messes with knight alpha
             this.canvas.rect(k.w, k.h)
-            .attr('fill', this.params.draw.knight.border.color)
-            .attr('fill-opacity', this.params.draw.knight.border.alpha)
+            .attr('fill', this.params.knight.border.color)
+            .attr('fill-opacity', this.params.knight.border.alpha)
             .move(k.x,k.y);
 
             this.canvas.rect(k.w - this.knight_border_width, k.h - this.knight_border_width)
             .attr('fill', k.color)
-            .attr('fill-opacity', this.params.draw.knight.alpha)
+            .attr('fill-opacity', this.params.knight.alpha)
             .move(k.x + this.knight_border_width,k.y + this.knight_border_width);
         });
     }
 
     drawBackground(){
-        if(this.params.draw.background.on){
+        if(this.params.background.on){
             this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
-            .attr('fill', this.params.draw.background.color)
+            .attr('fill', this.params.background.color)
         }
     }
 

@@ -14,12 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const controller_1 = require("./knight_trap_weave/controller");
+const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const { convert } = require('convert-svg-to-png');
 const app = express_1.default();
 const port = 8080;
 app.use(body_parser_1.default.json());
+app.use(cors_1.default());
 app.get("/knight_trap_weave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('KTW request', req.body);
     const ktw = new controller_1.KnightTrapWeave(req.body);
     const svg = ktw.generate();
     const png = yield convert(svg, {
@@ -27,6 +30,8 @@ app.get("/knight_trap_weave", (req, res) => __awaiter(void 0, void 0, void 0, fu
         height: req.body.canvas.width
     });
     res.set('Content-Type', 'image/png');
+    // console.log('svg->',svg)
+    // res.send(svg);
     res.send(png);
 }));
 app.listen(port, () => {

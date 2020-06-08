@@ -94,9 +94,9 @@ class Weave {
             };
             // if(this.params.draw.jump_options.on)
             // this.drawOptions(options);
-            if (this.params.draw.knight.on)
+            if (this.params.knight.on)
                 jump_frame.knight.push(this.drawKnight());
-            if (this.params.draw.weave.on)
+            if (this.params.weave.on)
                 jump_frame.weave = this.drawWeave();
             shapes.push(jump_frame);
             const options = this.calculateNext();
@@ -128,7 +128,7 @@ class Weave {
     }
     drawKnight() {
         let rect;
-        if (this.params.draw.knight.mode === 'squares') {
+        if (this.params.knight.mode === 'squares') {
             rect = {
                 x: this.grid[this.knight_x][this.knight_y].x,
                 y: this.grid[this.knight_x][this.knight_y].y,
@@ -137,7 +137,7 @@ class Weave {
                 color: '',
             };
         }
-        if (this.params.draw.knight.mode === 'bars') {
+        if (this.params.knight.mode === 'bars') {
             rect = {
                 x: this.grid[this.knight_x][this.knight_y].x,
                 y: this.grid[this.knight_x][this.knight_y].y,
@@ -150,7 +150,7 @@ class Weave {
         // let cv = this.jump_count / this.params.color.domain;
         // let col = this.color_machine(1 - cv).rgba()
         // col[3] = this.params.jump_options.alpha * 255;
-        rect.color = this.color_machine(cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex();
+        rect.color = this.color_machine(cv, 'rgba').alpha(255 * this.params.knight.alpha).hex();
         return rect;
     }
     drawWeave() {
@@ -162,7 +162,7 @@ class Weave {
         }), this.params.weave.smooth.iter_end, this.params.weave.smooth.iter_start, this.params.weave.smooth.ratio).map((p, index) => {
             // let cv = arrSum(this.grid.map((row)=> row.map((cell)=>cell.value))) / this.start_grid_sum;
             let cv = (this.jump_count % this.params.color.domain) / this.params.color.domain;
-            return Object.assign(Object.assign({}, p), { color: this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.draw.knight.alpha).hex() });
+            return Object.assign(Object.assign({}, p), { color: this.color_machine(1 - cv, 'rgba').alpha(255 * this.params.knight.alpha).hex() });
         });
     }
     drawOptions(options) {
