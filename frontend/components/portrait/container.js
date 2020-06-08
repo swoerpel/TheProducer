@@ -1,7 +1,7 @@
 const portrait_container_template = document.createElement('template');
 portrait_container_template.innerHTML = `
-<app-header></app-header>
-<app-portrait></app-portrait>
+<portrait-header></portrait-header>
+<portrait-image></portrait-image>
 `
 
 class PortraitContainer extends HTMLElement {
@@ -14,4 +14,4 @@ class PortraitContainer extends HTMLElement {
     }
 }
 
-window.customElements.define('app-portrait-container',PortraitContainer);
+window.customElements.define('portrait-container',PortraitContainer);

@@ -1,22 +1,22 @@
-const portrait_template = document.createElement('template');
-portrait_template.innerHTML = `
+const portrait_image_template = document.createElement('template');
+portrait_image_template.innerHTML = `
     <link rel="stylesheet" href="css/portrait.css">
-    <div id="dynImg" class="svgContainer"></div>
+    <div id="image" class="svgContainer"></div>
 `
 
-class Portrait extends HTMLElement {
+class PortraitImage extends HTMLElement {
     constructor(){
         super();
         this.shared = new Shared();
         console.log('simulation_params',simulation_params)
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(
-            portrait_template.content.cloneNode(true)
+            portrait_image_template.content.cloneNode(true)
         );
     }
 
     async connectedCallback() {
-        this.shadowRoot.querySelector('#dynImg').innerHTML = 
+        this.shadowRoot.querySelector('#image').innerHTML = 
             await this.sendHttpRequest(
                 'POST', 
                 'http://localhost:8080/knight_trap_weave', 
@@ -43,4 +43,4 @@ class Portrait extends HTMLElement {
     }
 }
 
-window.customElements.define('app-portrait',Portrait);
+window.customElements.define('portrait-image',PortraitImage);
