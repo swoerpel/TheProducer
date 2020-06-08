@@ -1,45 +1,16 @@
 const template = document.createElement('template');
 template.innerHTML = `
+
     <link rel="stylesheet" href="./portrait.css">
     <button id="generateSVG">Generate SVG</button>
     <div id="dynImg" class="svgContainer"></div>
 `
 
-var Utf8ArrayToStr = (array) => {
-    var out, i, len, c;
-    var char2, char3;
-    out = "";
-    len = array.length;
-    i = 0;
-    while(i < len) {
-    c = array[i++];
-    switch(c >> 4)
-    { 
-        case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
-        // 0xxxxxxx
-        out += String.fromCharCode(c);
-        break;
-        case 12: case 13:
-        // 110x xxxx   10xx xxxx
-        char2 = array[i++];
-        out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
-        break;
-        case 14:
-        // 1110 xxxx  10xx xxxx  10xx xxxx
-        char2 = array[i++];
-        char3 = array[i++];
-        out += String.fromCharCode(((c & 0x0F) << 12) |
-                        ((char2 & 0x3F) << 6) |
-                        ((char3 & 0x3F) << 0));
-        break;
-    }
-    }
-    return out;
-}
 
 class Portrait extends HTMLElement {
     constructor(){
         super();
+        this.shared = new Shared();
         console.log('simulation_params',simulation_params)
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(
@@ -58,6 +29,7 @@ class Portrait extends HTMLElement {
 
     sendHttpRequest = async (method, url, data) => {
         let result = '';
+        let that = this;
         return fetch(url, {
             method: method,
             body: JSON.stringify(data),
@@ -67,7 +39,7 @@ class Portrait extends HTMLElement {
             return reader.read().then(function processText({ done, value }) {
                 if (done) 
                     return result;
-                result = result.concat(Utf8ArrayToStr(value));
+                result = result.concat(that.shared.Utf8ArrayToStr(value));
                 return reader.read().then(processText);
             });
         });
