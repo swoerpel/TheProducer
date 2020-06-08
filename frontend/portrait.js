@@ -1,11 +1,9 @@
-const template = document.createElement('template');
-template.innerHTML = `
-
+const portrait_template = document.createElement('template');
+portrait_template.innerHTML = `
     <link rel="stylesheet" href="./portrait.css">
     <button id="generateSVG">Generate SVG</button>
     <div id="dynImg" class="svgContainer"></div>
 `
-
 
 class Portrait extends HTMLElement {
     constructor(){
@@ -14,7 +12,7 @@ class Portrait extends HTMLElement {
         console.log('simulation_params',simulation_params)
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(
-            template.content.cloneNode(true)
+            portrait_template.content.cloneNode(true)
         );
     }
 
@@ -29,7 +27,7 @@ class Portrait extends HTMLElement {
 
     sendHttpRequest = async (method, url, data) => {
         let result = '';
-        let that = this;
+        let utf8ArrayToStr = this.shared.Utf8ArrayToStr;
         return fetch(url, {
             method: method,
             body: JSON.stringify(data),
@@ -39,7 +37,7 @@ class Portrait extends HTMLElement {
             return reader.read().then(function processText({ done, value }) {
                 if (done) 
                     return result;
-                result = result.concat(that.shared.Utf8ArrayToStr(value));
+                result = result.concat(utf8ArrayToStr(value));
                 return reader.read().then(processText);
             });
         });
