@@ -39,7 +39,7 @@ class KnightTrapWeave {
                     this.drawKnight(shapes);
                     this.drawWeave(shapes, index);
                 });
-                this.appendWeaveEndCaps(jumps);
+                // this.appendWeaveEndCaps(jumps) //unsure if needed
                 this.weave.Refresh();
             }
             return this.canvas.node.outerHTML;
@@ -120,7 +120,9 @@ class KnightTrapWeave {
         const window = createSVGWindow();
         const document = window.document;
         registerWindow(window, document);
+        console.log('document.documentElement', document.documentElement);
         this.canvas = SVG(document.documentElement);
+        // console.log('this.canvas',this.canvas)
         this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
             .attr('fill', this.params.color.background);
     }

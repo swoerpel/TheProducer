@@ -27,6 +27,7 @@ export class KnightTrapWeave {
         const window = createSVGWindow()
         const document = window.document
         registerWindow(window, document);
+        console.log('document.documentElement',document.documentElement)
         this.canvas = SVG(document.documentElement);
         this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
             .attr('fill', this.params.color.background)
