@@ -7,7 +7,12 @@ const app = express();
 const port = 8080; 
 
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.post( "/knight_trap_weave", async ( req: any, res:any ) => {
   console.log('KTW request', req.body)

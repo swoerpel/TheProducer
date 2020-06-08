@@ -122,7 +122,6 @@ class KnightTrapWeave {
         registerWindow(window, document);
         console.log('document.documentElement', document.documentElement);
         this.canvas = SVG(document.documentElement);
-        // console.log('this.canvas',this.canvas)
         this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
             .attr('fill', this.params.color.background);
     }

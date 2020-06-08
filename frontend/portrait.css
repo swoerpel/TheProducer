@@ -1,0 +1,12 @@
+.svgContainer {
+    background-color: #FFEB3B;
+    width: 800px;
+    height: 800px;
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.svgContainer svg {
+    width: 800px;
+}
