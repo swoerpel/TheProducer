@@ -1,7 +1,6 @@
 const portrait_template = document.createElement('template');
 portrait_template.innerHTML = `
-    <link rel="stylesheet" href="./portrait.css">
-    <button id="generateSVG">Generate SVG</button>
+    <link rel="stylesheet" href="css/portrait.css">
     <div id="dynImg" class="svgContainer"></div>
 `
 

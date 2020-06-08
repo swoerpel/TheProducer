@@ -1,5 +1,6 @@
 const portrait_container_template = document.createElement('template');
 portrait_container_template.innerHTML = `
+<app-header></app-header>
 <app-portrait></app-portrait>
 `
 
