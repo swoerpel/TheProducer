@@ -39,7 +39,7 @@ class KnightTrapWeave {
                     this.drawKnight(shapes);
                     this.drawWeave(shapes, index);
                 });
-                // this.appendWeaveEndCaps(jumps)
+                this.appendWeaveEndCaps(jumps);
                 this.weave.Refresh();
             }
             return this.canvas.node.outerHTML;
@@ -121,13 +121,8 @@ class KnightTrapWeave {
         const document = window.document;
         registerWindow(window, document);
         this.canvas = SVG(document.documentElement);
-        this.drawBackground();
-    }
-    drawBackground() {
-        if (this.params.background.on) {
-            this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
-                .attr('fill', this.params.background.color);
-        }
+        this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
+            .attr('fill', this.params.color.background);
     }
 }
 exports.KnightTrapWeave = KnightTrapWeave;

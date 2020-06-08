@@ -28,7 +28,8 @@ export class KnightTrapWeave {
         const document = window.document
         registerWindow(window, document);
         this.canvas = SVG(document.documentElement);
-        this.drawBackground();
+        this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
+            .attr('fill', this.params.color.background)
     }
 
     generate = () => {
@@ -38,7 +39,7 @@ export class KnightTrapWeave {
                 this.drawKnight(shapes);
                 this.drawWeave(shapes,index);
             });  
-            // this.appendWeaveEndCaps(jumps)
+            // this.appendWeaveEndCaps(jumps) //unsure if needed
             this.weave.Refresh();
         }
         return this.canvas.node.outerHTML
@@ -104,13 +105,6 @@ export class KnightTrapWeave {
             .attr('fill-opacity', this.params.knight.alpha)
             .move(k.x + this.knight_border_width,k.y + this.knight_border_width);
         });
-    }
-
-    drawBackground(){
-        if(this.params.background.on){
-            this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
-            .attr('fill', this.params.background.color)
-        }
     }
 
     createColorMachine = () => {
