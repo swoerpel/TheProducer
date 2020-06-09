@@ -11,7 +11,8 @@ class PortraitHeader extends HTMLElement {
         this.shadowRoot.appendChild(
             portrait_header_template.content.cloneNode(true)
         );
+        console.log('WOAH',JSON.parse(atob(this.getAttribute('headerText'))))
     }
 }
-
+PortraitHeader.observedAttributes = ['headerText']
 window.customElements.define('portrait-header',PortraitHeader);
