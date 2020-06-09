@@ -8,7 +8,6 @@ class PortraitImage extends HTMLElement {
     constructor(){
         super();
         this.shared = new Shared();
-        console.log('simulation_params',simulation_params)
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(
             portrait_image_template.content.cloneNode(true)
@@ -20,11 +19,12 @@ class PortraitImage extends HTMLElement {
             await this.sendHttpRequest(
                 'POST', 
                 'http://localhost:8080/knight_trap_weave', 
-                simulation_params
+                JSON.parse(atob(this.getAttribute('simulation_params')))
             ); 
     }
 
     sendHttpRequest = async (method, url, data) => {
+        console.log('portrait-image request -> ',data)
         let result = '';
         let utf8ArrayToStr = this.shared.Utf8ArrayToStr;
         return fetch(url, {
@@ -42,5 +42,5 @@ class PortraitImage extends HTMLElement {
         });
     }
 }
-
+PortraitImage.observedAttributes = ['simulation_params']
 window.customElements.define('portrait-image',PortraitImage);
