@@ -1,28 +1,7 @@
-class PortraitContainer extends HTMLElement {
-    constructor(){
-        super();
-        this.template = document.createElement('template');
-        this.setTemplate();
-    }
 
-    setTemplate(){
-        const grid_lengths = [4,4,8,8,4,6,6,6,8,7,6,5,4,9,8,6]
-        this.appendPortrait(grid_lengths)
-        this.attachShadow({mode: 'open'});
-        this.shadowRoot.appendChild(
-            this.template.content.cloneNode(true)
-        );
-    }
+class KnightTrapWeaveService {
 
-    appendPortrait(grid_lengths){
-        this.template.innerHTML += `<portrait-header></portrait-header>`
-        this.template.innerHTML +=`<link rel="stylesheet" href="css/portrait-container.css">`
-        this.template.innerHTML += 
-        `<div id="image-grid" class="image-grid">` + grid_lengths.map((grid_len) =>
-            `<portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>`).join('') + 
-        '</div>';
-    }
-
+  constructor() {}
     getCanvasParams(){
         return {
             "width": 800,
@@ -101,8 +80,8 @@ class PortraitContainer extends HTMLElement {
             "on": true,
             "color": "white"
         }
-        return btoa(JSON.stringify(params))
+        return params;
+    // return btoa(JSON.stringify(params))
     }
 }
-
-window.customElements.define('portrait-container',PortraitContainer);
+export const knightTrapWeaveService = new KnightTrapWeaveService();
