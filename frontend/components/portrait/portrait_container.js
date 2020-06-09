@@ -1,54 +1,27 @@
-
-
 class PortraitContainer extends HTMLElement {
     constructor(){
         super();
         this.template = document.createElement('template');
-        this.createGrid();
         this.setTemplate();
     }
 
-    createGrid(){
-    }
-
-
-    // <portrait-image class="image" simulation_params="${this.paramFactory(4)}"></portrait-image>
-    // <portrait-image class="image" simulation_params="${this.paramFactory(8)}"></portrait-image>
-    // <portrait-image class="image" simulation_params="${this.paramFactory(12)}"></portrait-image>
-
     setTemplate(){
-        this.appendPortrait(6)
+        const grid_lengths = [4,4,8,8,4,6,6,6,8,7,6,5,4,9,8,6]
+
+        this.appendPortrait(grid_lengths)
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(
             this.template.content.cloneNode(true)
         );
     }
-    appendPortrait(grid_len){
-        this.template.innerHTML += `
-        <portrait-header></portrait-header>
-        <link rel="stylesheet" href="css/portrait-container.css">
-        <div id="image-grid" class="image-grid">
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>`
-        this.template.innerHTML+= '</div>'
-        // for(let i = 0; i < 9; i++){
-        //     this.template.innerHTML+= `<portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>`
-        // }
-        // this.template.innerHTML+=
+
+    appendPortrait(grid_lengths){
+        this.template.innerHTML += `<portrait-header></portrait-header>`
+        this.template.innerHTML +=`<link rel="stylesheet" href="css/portrait-container.css">`
+        this.template.innerHTML += 
+        `<div id="image-grid" class="image-grid">` + grid_lengths.map((grid_len) =>
+            `<portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>`).join('') + 
+        '</div>';
     }
 
     getCanvasParams(){
