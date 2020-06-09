@@ -31,7 +31,24 @@ class PortraitContainer extends HTMLElement {
         <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
         <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
         <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
-        </div>`
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>`
+        this.template.innerHTML+= '</div>'
+        // for(let i = 0; i < 9; i++){
+        //     this.template.innerHTML+= `<portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>`
+        // }
+        // this.template.innerHTML+=
     }
 
     getCanvasParams(){
