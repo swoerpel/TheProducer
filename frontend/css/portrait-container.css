@@ -1,0 +1,8 @@
+.image-grid {
+    display: grid;
+}
+
+.image{
+    display: flex;
+    justify-content: start;
+}

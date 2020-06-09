@@ -3,38 +3,60 @@
 class PortraitContainer extends HTMLElement {
     constructor(){
         super();
-        this.setTemplate()
+        this.template = document.createElement('template');
+        this.createGrid();
+        this.setTemplate();
     }
 
+    createGrid(){
+    }
+
+
+    // <portrait-image class="image" simulation_params="${this.paramFactory(4)}"></portrait-image>
+    // <portrait-image class="image" simulation_params="${this.paramFactory(8)}"></portrait-image>
+    // <portrait-image class="image" simulation_params="${this.paramFactory(12)}"></portrait-image>
+
     setTemplate(){
-        this.template = document.createElement('template');
-        this.template.innerHTML = `
-        <portrait-header></portrait-header>
-        <portrait-image simulation_params="${this.paramFactory()}"></portrait-image>
-        <portrait-image simulation_params="${this.paramFactory()}"></portrait-image>
-        <portrait-image simulation_params="${this.paramFactory()}"></portrait-image>
-        `
+        this.appendPortrait(6)
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(
             this.template.content.cloneNode(true)
         );
     }
+    appendPortrait(grid_len){
+        this.template.innerHTML += `
+        <portrait-header></portrait-header>
+        <link rel="stylesheet" href="css/portrait-container.css">
+        <div id="image-grid" class="image-grid">
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        <portrait-image class="image" simulation_params="${this.paramFactory(grid_len)}"></portrait-image>
+        </div>`
+    }
 
-    paramFactory(){
-        const params = {};
-        params['trap_count'] = 3;
-        params['canvas'] = {
+    getCanvasParams(){
+        return {
             "width": 800,
             "height": 800
         }
-        params['grid'] = {
-            "cols": 12,
-            "rows": 12,
+    }
+
+    getGridParams(dim){
+        return {
+            "cols": dim,
+            "rows": dim,
             "max_value": 4,
             "max_value_step": 1,
             "increment_max_value": true,
             "random": true
         }
+    }
+
+    paramFactory(dim){
+        const params = {};
+        params['trap_count'] = 3;
+        params['canvas'] = this.getCanvasParams();
+        params['grid'] = this.getGridParams(dim);
         params['knight'] = {
             "init":{
                 "mode": "start",

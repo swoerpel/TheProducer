@@ -1,6 +1,6 @@
 const portrait_image_template = document.createElement('template');
 portrait_image_template.innerHTML = `
-    <link rel="stylesheet" href="css/portrait.css">
+    <link rel="stylesheet" href="css/portrait_image.css">
     <div id="image" class="svgContainer"></div>
 `
 
