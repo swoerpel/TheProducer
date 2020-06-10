@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, Listen, State, Watch } from '@stencil/core';
 import { knightTrapWeaveService } from '../../services/knight_trap_weave.service';
 
 @Component({
@@ -7,23 +7,31 @@ import { knightTrapWeaveService } from '../../services/knight_trap_weave.service
   shadow: true
 })
 
-export class AppHome {
+
+export class AppPortrait {
   innerHTML: string;
-  image_params = [];  
+  @State() image_params = []; 
   constructor() {}
 
-  componentWillLoad(){
+  @Listen('refresh_params')
+  componentWillLoad(e){
     let options = [{},{},{}]
-    options.forEach((op)=>{
-      this.image_params.push(JSON.stringify(knightTrapWeaveService.paramFactory(6)))
+    console.log('e',e)
+    this.image_params = options.map((op)=>{
+      return JSON.stringify(knightTrapWeaveService.paramFactory(12))
     })
+    console.log('post img params',this.image_params)
+  }
+
+  componentWillRender(){
   }
 
   render() {
+    console.log('render->',this.image_params)
     return (
       <div class='app-portrait'>
         <div class='portrait-image-group'>
-          {this.image_params.map((params)=>{
+          {[...this.image_params].map((params)=>{
               return <portrait-image simulation_params={params}></portrait-image>
           })} 
         </div>

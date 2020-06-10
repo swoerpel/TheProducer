@@ -11,6 +11,7 @@ class KnightTrapWeaveService {
         params['knight'] = this.getKnightParams();
         params['weave'] = this.getWeaveParams();
         params['color']= this.getColorParams();
+        console.log(dim,params)
         return params;
     }
 
