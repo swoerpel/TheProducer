@@ -102,7 +102,7 @@ export class Weave{
 
     Jump(N:number = 1): any[]{
         let shapes: any[] = [];
-        for(let i = 0; i < N; i++){
+        while(true){
             let jump_frame: any = {
                 knight: [],
                 weave: [],

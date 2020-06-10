@@ -34,7 +34,7 @@ class KnightTrapWeave {
         this.knight_border_width = this.cell_width * this.params.knight.border.width / 2;
         this.generate = () => {
             for (let i = 0; i < this.params.trap_count; i++) {
-                const jumps = this.weave.Jump(this.params.jump.count);
+                const jumps = this.weave.Jump();
                 jumps.forEach((shapes, index) => {
                     this.drawKnight(shapes);
                     this.drawWeave(shapes, index);
@@ -42,6 +42,8 @@ class KnightTrapWeave {
                 // this.appendWeaveEndCaps(jumps) //unsure if needed
                 this.weave.Refresh();
             }
+            this.canvas.attr('width', this.params.canvas.width);
+            this.canvas.attr('height', this.params.canvas.height);
             return this.canvas.node.outerHTML;
         };
         this.appendWeaveEndCaps = (jumps) => {
@@ -120,7 +122,6 @@ class KnightTrapWeave {
         const window = createSVGWindow();
         const document = window.document;
         registerWindow(window, document);
-        console.log('document.documentElement', document.documentElement);
         this.canvas = SVG(document.documentElement);
         this.canvas.rect(this.params.canvas.width, this.params.canvas.height)
             .attr('fill', this.params.color.background);

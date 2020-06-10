@@ -87,7 +87,7 @@ class Weave {
     }
     Jump(N = 1) {
         let shapes = [];
-        for (let i = 0; i < N; i++) {
+        while (true) {
             let jump_frame = {
                 knight: [],
                 weave: [],

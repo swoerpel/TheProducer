@@ -1,0 +1,22 @@
+.portrait-settings{
+  display: flex;
+  flex-direction: column;
+  flex:1;
+  flex-grow: 1;
+
+  background-color: white;
+}
+
+.portrait-settings-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 10px; */
+  /* flex:1; */
+  /* flex-grow: 1; */
+}
+
+.portrait-settings-body{
+  /* flex:1; */
+  /* flex-grow: 1; */
+}

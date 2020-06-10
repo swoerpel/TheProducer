@@ -1,5 +1,9 @@
-.app-home {
-  padding: 10px;
+.portrait-image {
+  background-color: #FFEB3B;
+  display: flex;
+  align-content: center;
+  flex: 1;
+  justify-content: flex-start;
 }
 
 button {
@@ -24,15 +28,3 @@ button:hover {
   transform: translateY(1px);
 }
 
-.svgContainer {
-  background-color: #FFEB3B;
-  width: 800px;
-  height: 800px;
-  display: flex;
-  align-content: center;
-  justify-content: flex-start;
-}
-
-.svgContainer svg {
-  width: 800px;
-}

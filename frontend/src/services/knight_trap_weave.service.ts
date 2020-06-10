@@ -1,11 +1,23 @@
 
 class KnightTrapWeaveService {
+    param_group: any;
+    constructor() {}
 
-  constructor() {}
+    paramFactory(dim = 6){
+        const params = {};
+        params['trap_count'] = 3;
+        params['canvas'] = this.getCanvasParams();
+        params['grid'] = this.getGridParams(dim);
+        params['knight'] = this.getKnightParams();
+        params['weave'] = this.getWeaveParams();
+        params['color']= this.getColorParams();
+        return params;
+    }
+
     getCanvasParams(){
         return {
-            "width": 800,
-            "height": 800
+            "width": 400,
+            "height": 400
         }
     }
 
@@ -20,12 +32,8 @@ class KnightTrapWeaveService {
         }
     }
 
-    paramFactory(dim){
-        const params = {};
-        params['trap_count'] = 3;
-        params['canvas'] = this.getCanvasParams();
-        params['grid'] = this.getGridParams(dim);
-        params['knight'] = {
+    getKnightParams(){
+        return {
             "init":{
                 "mode": "start",
                 "x": 18,
@@ -45,7 +53,10 @@ class KnightTrapWeaveService {
                 "alpha":1
             }
         }
-        params['weave'] = {
+    }
+
+    getWeaveParams(){
+        return {
             "queue_length": 5,
             "smooth":{
                 "iter_start": 0,
@@ -68,20 +79,15 @@ class KnightTrapWeaveService {
                 "color": "black"
             }
         }
-        params['jump'] = {
-            "count":1000
-        }
-        params['color']={
+    }
+
+    getColorParams(){
+        return {
             "domain":12,
             "palette": "Spectral",
             "background": "light-grey"
         }
-        params['background'] = {
-            "on": true,
-            "color": "white"
-        }
-        return params;
-    // return btoa(JSON.stringify(params))
     }
+
 }
 export const knightTrapWeaveService = new KnightTrapWeaveService();
