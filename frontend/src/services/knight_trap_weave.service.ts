@@ -3,22 +3,21 @@ class KnightTrapWeaveService {
     param_group: any;
     constructor() {}
 
-    paramFactory(dim = 6){
+    paramFactory(options){
         const params = {};
         params['trap_count'] = 3;
         params['canvas'] = this.getCanvasParams();
-        params['grid'] = this.getGridParams(dim);
+        params['grid'] = this.getGridParams(options.grid_size);
         params['knight'] = this.getKnightParams();
         params['weave'] = this.getWeaveParams();
-        params['color']= this.getColorParams();
-        console.log(dim,params)
+        params['color']= this.getColorParams(options.color_palette);
         return params;
     }
 
     getCanvasParams(){
         return {
-            "width": 400,
-            "height": 400
+            "width": 800,
+            "height": 800
         }
     }
 
@@ -82,10 +81,10 @@ class KnightTrapWeaveService {
         }
     }
 
-    getColorParams(){
+    getColorParams(palette = 'Spectral'){
         return {
             "domain":12,
-            "palette": "Spectral",
+            "palette": palette,
             "background": "light-grey"
         }
     }

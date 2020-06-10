@@ -9,35 +9,29 @@ import { knightTrapWeaveService } from '../../services/knight_trap_weave.service
 
 
 export class AppPortrait {
-  innerHTML: string;
-  @State() image_params = []; 
-  constructor() {}
-
-  @Listen('refresh_params')
-  componentWillLoad(e){
-    let options = [{},{},{}]
-    console.log('e',e)
-    this.image_params = options.map((op)=>{
-      return JSON.stringify(knightTrapWeaveService.paramFactory(12))
-    })
-    console.log('post img params',this.image_params)
+  @State() image_params; 
+  constructor() {
+    this.refreshImageParams();
   }
 
-  componentWillRender(){
+  @Listen('refresh_params')
+  refreshImageParams(event: CustomEvent<Object> = null){
+    console.log('event',event)
+    if(!event)
+      this.image_params = knightTrapWeaveService.paramFactory(6);
+    else
+      this.image_params = knightTrapWeaveService.paramFactory(event.detail);
   }
 
   render() {
-    console.log('render->',this.image_params)
+
     return (
       <div class='app-portrait'>
         <div class='portrait-image-group'>
-          {[...this.image_params].map((params)=>{
-              return <portrait-image simulation_params={params}></portrait-image>
-          })} 
+          <portrait-image simulation_params={this.image_params}></portrait-image>
         </div>
         <portrait-settings></portrait-settings>
       </div>
     );
   }
 }
-

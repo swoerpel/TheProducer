@@ -57,7 +57,7 @@ declare namespace LocalJSX {
         "simulation_params"?: any;
     }
     interface PortraitSettings {
-        "onRefresh_params"?: (event: CustomEvent<any>) => void;
+        "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
     interface IntrinsicElements {
         "app-portrait": AppPortrait;

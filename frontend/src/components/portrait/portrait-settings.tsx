@@ -1,6 +1,5 @@
 import { Component, h, State } from '@stencil/core';
-import { Event, EventEmitter } from '@stencil/core';
-import { knightTrapWeaveService } from '../../services/knight_trap_weave.service';
+import { Event, Element, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'portrait-settings',
@@ -10,36 +9,47 @@ import { knightTrapWeaveService } from '../../services/knight_trap_weave.service
 
 export class PortraitSettings {
 
-  @Event() refresh_params: EventEmitter; 
+  @Element() host: HTMLElement;
+  
+  @State() grid_size: number;
+  @State() color_palette: string;
 
-  @State() value: string;
-  @State() canvasOptions: any[] = [
-    { 'id': 1, 'len': 1200},
-    { 'id': 2, 'len': 600 },
-    { 'id': 3, 'len': 400 },
-    { 'id': 4, 'len': 300 }
-  ];
+  @Event({
+    eventName: 'refresh_params',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) refresh_params: EventEmitter<Object>;
 
-  handleSubmit(e) {
-    this.refresh_params.emit(this.value)
-    e.preventDefault()
-    // knightTrapWeaveService.setValue(this.value)
+
+  setGridSize(event){
+    this.grid_size = event.target.value;
   }
 
-  handleChange(event) {
-    this.value = event.target.value;
+  setColorPalette(event){
+    this.color_palette = event.target.value;
+  }
+
+
+  handleRefreshParams(e) {
+    console.log('EEEEEEE',e)
+    e.preventDefault();
+    this.refresh_params.emit({
+      grid_size: this.grid_size,
+      color_palette: this.color_palette
+    })
   }
 
   render() {
     return (
-      <div class='portrait-settings'>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label>
-            <input type="text" value={this.value} onInput={(event) => this.handleChange(event)} />
-          </label>
-          <input type="submit" value="Submit" />
+        <form class='portrait-settings' onSubmit={(e)=>this.handleRefreshParams(e)}>
+          <label>Grid Size</label>
+          <input onInput={(event)=> this.setGridSize(event)} type="text"/>
+          <label>Color Palette</label>
+          <input onInput={(event)=> this.setColorPalette(event)} type="text"/>
+          
+          <input class="refresh-button" type="submit" value="Submit" />
         </form>
-      </div>
     );
   }
 }

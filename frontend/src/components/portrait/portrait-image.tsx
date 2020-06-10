@@ -1,4 +1,4 @@
-import { Component, h, State, Prop } from '@stencil/core';
+import { Component, h, State, Prop, Listen, Watch } from '@stencil/core';
 import { Utf8ArrayToStr } from '../../services/shared.service';
 
 @Component({
@@ -9,22 +9,28 @@ import { Utf8ArrayToStr } from '../../services/shared.service';
 
 export class PortraitSVGComponent {
   @Prop() simulation_params: any;
+
   @State() svg:string;
-  async componentWillLoad() {
-    this.svg = await this.refreshSVG();
+
+  constructor(){}
+
+  componentWillLoad() {
+    this.refreshSVG();
   }
 
-  refreshSVG(){
+  @Watch('simulation_params')
+  async refreshSVG(){
+    console.log('refresh')
     let method = 'POST';
     let url = 'http://localhost:8080/knight_trap_weave';
-    return this.sendHttpRequest(method,url,this.simulation_params);
+    this.svg = await this.sendHttpRequest(method,url,this.simulation_params);
   }
 
   sendHttpRequest = async (method, url, data) => {
     let result = '';
     return fetch(url, {
         method: method,
-        body: data,
+        body: JSON.stringify(data),
         headers: data ? { 'Content-Type': 'application/json' } : {}
     }).then(response => {
         const reader = response.body.getReader();
@@ -44,6 +50,3 @@ export class PortraitSVGComponent {
   }
 }
 
-{/* <button onClick={async () => this.svg = await this.refreshSVG()}> */}
-{/* refresh */}
-{/* </button> */}
