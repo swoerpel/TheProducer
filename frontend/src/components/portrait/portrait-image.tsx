@@ -1,4 +1,4 @@
-import { Component, h, State, Prop, Listen, Watch } from '@stencil/core';
+import { Component, h, State, Prop, Watch } from '@stencil/core';
 import { Utf8ArrayToStr } from '../../services/shared.service';
 
 @Component({

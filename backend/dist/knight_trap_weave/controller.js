@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KnightTrapWeave = void 0;
 const chroma = __importStar(require("chroma.ts"));
 const weave_1 = require("./weave");
-const chromotome_1 = require("./chromotome");
+const chromotome_1 = require("../shared/chromotome");
 const { createSVGWindow } = require('svgdom');
 const { SVG, registerWindow } = require('@svgdotjs/svg.js');
 class KnightTrapWeave {

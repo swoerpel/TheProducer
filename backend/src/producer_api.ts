@@ -1,8 +1,11 @@
-import express from "express";
+
 import { KnightTrapWeave } from "./knight_trap_weave/controller";
-import cors from "cors";
+import { ColorLibrary } from "./color/controller";
+
+import express from "express";
 import bodyParser from "body-parser";
-const { convert } = require('convert-svg-to-png');
+
+
 const app = express();
 const port = 8080; 
 
@@ -18,6 +21,7 @@ app.post( "/knight_trap_weave", async ( req: any, res:any ) => {
   console.log('KTW request', req.body)
     const ktw = new KnightTrapWeave(req.body);
     const svg = ktw.generate()
+    // const { convert } = require('convert-svg-to-png');
     // const png = await convert(svg,
     // { 
     //     width: req.body.canvas.width, 
@@ -28,6 +32,12 @@ app.post( "/knight_trap_weave", async ( req: any, res:any ) => {
       'Content-Length': svg.length
     });
     res.end(svg); 
+} );
+
+app.get( "/color_library",( req: any, res:any ) => {
+    const color_library = new ColorLibrary();
+    const lib = color_library.getColorLibrary();
+    res.send(JSON.stringify(lib)); 
 } );
 
 app.listen( port, () => {

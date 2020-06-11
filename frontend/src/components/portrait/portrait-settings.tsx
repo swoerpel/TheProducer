@@ -11,8 +11,8 @@ export class PortraitSettings {
 
   @Element() host: HTMLElement;
   
-  @State() grid_size: number;
-  @State() color_palette: string;
+  @State() grid_size: number = 8;
+  @State() color_palette: string = 'Spectral';
 
   @Event({
     eventName: 'refresh_params',
@@ -22,6 +22,8 @@ export class PortraitSettings {
   }) refresh_params: EventEmitter<Object>;
 
 
+  @Event() on_color_list_toggle  : EventEmitter;
+
   setGridSize(event){
     this.grid_size = event.target.value;
   }
@@ -30,9 +32,7 @@ export class PortraitSettings {
     this.color_palette = event.target.value;
   }
 
-
   handleRefreshParams(e) {
-    console.log('EEEEEEE',e)
     e.preventDefault();
     this.refresh_params.emit({
       grid_size: this.grid_size,
@@ -45,9 +45,7 @@ export class PortraitSettings {
         <form class='portrait-settings' onSubmit={(e)=>this.handleRefreshParams(e)}>
           <label>Grid Size</label>
           <input onInput={(event)=> this.setGridSize(event)} type="text"/>
-          <label>Color Palette</label>
-          <input onInput={(event)=> this.setColorPalette(event)} type="text"/>
-          
+          <color-palette-list></color-palette-list>
           <input class="refresh-button" type="submit" value="Submit" />
         </form>
     );

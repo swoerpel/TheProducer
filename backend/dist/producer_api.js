@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
 const controller_1 = require("./knight_trap_weave/controller");
+const controller_2 = require("./color/controller");
+const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const { convert } = require('convert-svg-to-png');
 const app = express_1.default();
 const port = 8080;
 app.use(body_parser_1.default.json());
@@ -29,6 +29,7 @@ app.post("/knight_trap_weave", (req, res) => __awaiter(void 0, void 0, void 0, f
     console.log('KTW request', req.body);
     const ktw = new controller_1.KnightTrapWeave(req.body);
     const svg = ktw.generate();
+    // const { convert } = require('convert-svg-to-png');
     // const png = await convert(svg,
     // { 
     //     width: req.body.canvas.width, 
@@ -40,6 +41,11 @@ app.post("/knight_trap_weave", (req, res) => __awaiter(void 0, void 0, void 0, f
     });
     res.end(svg);
 }));
+app.get("/color_library", (req, res) => {
+    const color_library = new controller_2.ColorLibrary();
+    const lib = color_library.getColorLibrary();
+    res.send(JSON.stringify(lib));
+});
 app.listen(port, () => {
     console.log(`server started at http://localhost:${port}`);
 });

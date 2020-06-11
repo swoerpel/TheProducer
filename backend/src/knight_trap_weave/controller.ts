@@ -3,7 +3,7 @@ import * as chroma from 'chroma.ts';
 
 import { Weave } from "./weave";
 import { Rect } from "./models";
-import { chromotome_palettes } from './chromotome';
+import { chromotome_palettes } from '../shared/chromotome';
 
 const { createSVGWindow } = require('svgdom');
 const { SVG, registerWindow } = require('@svgdotjs/svg.js');
