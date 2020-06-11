@@ -63,7 +63,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface ColorPaletteList {
-        "onOn_color_list_toggle"?: (event: CustomEvent<any>) => void;
+        "onOn_palette_select"?: (event: CustomEvent<string>) => void;
     }
     interface PortraitImage {
         "simulation_params"?: any;

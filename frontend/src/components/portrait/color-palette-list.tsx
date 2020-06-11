@@ -10,7 +10,7 @@ export class ColorPaletteList {
 
   @State() color_palette: string = 'Spectral';
   @State() toggle_color_list : boolean = false;
-  @Event() on_color_list_toggle  : EventEmitter;
+  @Event() on_palette_select  : EventEmitter<string>;
 
   color_palette_list: {name:string, colors: string[]}[];
 
@@ -37,15 +37,14 @@ export class ColorPaletteList {
     });
   }
 
-
   toggleColorListDropdown(): void {
-    console.log('toggle_color_list',this.toggle_color_list)
      this.toggle_color_list = !this.toggle_color_list;
-     // When the user click emit the toggle state value
-     // A event can emit any type of value
-     this.on_color_list_toggle.emit({ visible: this.toggle_color_list });
   }
 
+  setColorPalette(selected_palette){
+    console.log('selected_palette',selected_palette)
+    this.on_palette_select.emit( selected_palette);
+  }
 
   render() {
     return (
@@ -54,7 +53,7 @@ export class ColorPaletteList {
           color palettes  {this.toggle_color_list ? <span>&#9650;</span> : <span>&#9660;</span>}
         </h2> 
         <ul class={ this.toggle_color_list ? 'active' : 'inactive' }>
-        {this.color_palette_list.map(item => <li><h3>{item.name}</h3></li>)}
+        {this.color_palette_list.map(item => <li onClick={() => this.setColorPalette(item.name)}><h3>{item.name}</h3></li>)}
         </ul>
       </div>
     )

@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Watch, Listen } from '@stencil/core';
 import { Event, Element, EventEmitter } from '@stencil/core';
 
 @Component({
@@ -28,8 +28,10 @@ export class PortraitSettings {
     this.grid_size = event.target.value;
   }
 
+  @Listen('on_palette_select')
   setColorPalette(event){
-    this.color_palette = event.target.value;
+    console.log('listenboievent',event)
+    this.color_palette = event.detail;
   }
 
   handleRefreshParams(e) {
