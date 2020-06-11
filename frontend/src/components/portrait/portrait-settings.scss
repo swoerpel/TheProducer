@@ -1,25 +1,41 @@
-.portrait-settings{
+.container{
   display: flex;
   flex-direction: column;
-  flex:1;
-  flex-grow: 1;
-
-  background-color: white;
-}
-
-.portrait-settings-header{
-  display: flex;
   justify-content: center;
-  align-items: center;
-  /* padding: 10px; */
-  /* flex:1; */
-  /* flex-grow: 1; */
+  .header{
+    font-size: x-large;
+    font-weight: bold;
+    
+  }
+
+  .settings{
+    background-color: tan;
+    display: flex;
+    padding-left: 10px;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 400px;
+    max-width: 800px;
+  }
+
 }
 
-.portrait-settings-body{
-  /* flex:1; */
-  /* flex-grow: 1; */
+
+
+
+.grid-size{
+  margin-top: 10px;
+  .input{
+    margin-left: 25px;
+  }
 }
+
+.color-grid{
+
+}
+
+
+
 
 .refresh-button{
   background: #5851ff;

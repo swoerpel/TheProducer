@@ -1,6 +1,6 @@
 import { Component, h, State } from '@stencil/core';
 import { Event, EventEmitter } from '@stencil/core';
-import { Utf8ArrayToStr } from '../../services/shared.service';
+import { Utf8ArrayToStr } from '../../../services/shared.service';
 
 @Component({
 	tag: 'color-palette-list',
@@ -16,7 +16,6 @@ export class ColorPaletteList {
 
   async componentWillLoad() {
     this.color_palette_list = await this.getColorLibrary();
-    console.log(this.color_palette_list)
   }
 
   getColorLibrary = () => {
@@ -42,19 +41,22 @@ export class ColorPaletteList {
   }
 
   setColorPalette(selected_palette){
-    console.log('selected_palette',selected_palette)
     this.on_palette_select.emit( selected_palette);
   }
 
   render() {
     return (
-      <div>
+      <div class="container">
         <h2 onClick={() => this. toggleColorListDropdown()}>
           color palettes  {this.toggle_color_list ? <span>&#9650;</span> : <span>&#9660;</span>}
         </h2> 
-        <ul class={ this.toggle_color_list ? 'active' : 'inactive' }>
-        {this.color_palette_list.map(item => <li onClick={() => this.setColorPalette(item.name)}><h3>{item.name}</h3></li>)}
-        </ul>
+        <div class={ this.toggle_color_list ? 'grid-container-active' : 'grid-container-inactive' }>
+          {this.color_palette_list.map(item => 
+          <li onClick={() => this.setColorPalette(item.name)}>
+            <div class="color-item">{item.name}</div>
+          </li>
+          )}
+        </div>
       </div>
     )
   }

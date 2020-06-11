@@ -12,6 +12,8 @@ export namespace Components {
     }
     interface ColorPaletteList {
     }
+    interface FormGridSize {
+    }
     interface PortraitImage {
         "simulation_params": any;
     }
@@ -37,6 +39,12 @@ declare global {
         prototype: HTMLColorPaletteListElement;
         new (): HTMLColorPaletteListElement;
     };
+    interface HTMLFormGridSizeElement extends Components.FormGridSize, HTMLStencilElement {
+    }
+    var HTMLFormGridSizeElement: {
+        prototype: HTMLFormGridSizeElement;
+        new (): HTMLFormGridSizeElement;
+    };
     interface HTMLPortraitImageElement extends Components.PortraitImage, HTMLStencilElement {
     }
     var HTMLPortraitImageElement: {
@@ -53,6 +61,7 @@ declare global {
         "app-portrait": HTMLAppPortraitElement;
         "app-root": HTMLAppRootElement;
         "color-palette-list": HTMLColorPaletteListElement;
+        "form-grid-size": HTMLFormGridSizeElement;
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
     }
@@ -65,6 +74,9 @@ declare namespace LocalJSX {
     interface ColorPaletteList {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
     }
+    interface FormGridSize {
+        "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
+    }
     interface PortraitImage {
         "simulation_params"?: any;
     }
@@ -76,6 +88,7 @@ declare namespace LocalJSX {
         "app-portrait": AppPortrait;
         "app-root": AppRoot;
         "color-palette-list": ColorPaletteList;
+        "form-grid-size": FormGridSize;
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
     }
@@ -87,6 +100,7 @@ declare module "@stencil/core" {
             "app-portrait": LocalJSX.AppPortrait & JSXBase.HTMLAttributes<HTMLAppPortraitElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "color-palette-list": LocalJSX.ColorPaletteList & JSXBase.HTMLAttributes<HTMLColorPaletteListElement>;
+            "form-grid-size": LocalJSX.FormGridSize & JSXBase.HTMLAttributes<HTMLFormGridSizeElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;
         }

@@ -1,13 +1,23 @@
 
 class KnightTrapWeaveService {
     param_group: any;
+
+    public grid_sizes = [
+        {rows:4,cols:4},
+        {rows:5,cols:5},
+        {rows:6,cols:6},
+        {rows:7,cols:7},
+        {rows:8,cols:8},
+        {rows:16,cols:16},
+        {rows:32,cols:32},
+    ];
     constructor() {}
 
-    paramFactory(options){
+    paramFactory(options = {grid_size_index:0,color_palette:'Spectral'}){
         const params = {};
         params['trap_count'] = 3;
         params['canvas'] = this.getCanvasParams();
-        params['grid'] = this.getGridParams(options.grid_size);
+        params['grid'] = this.getGridParams(options.grid_size_index);
         params['knight'] = this.getKnightParams();
         params['weave'] = this.getWeaveParams();
         params['color']= this.getColorParams(options.color_palette);
@@ -21,10 +31,10 @@ class KnightTrapWeaveService {
         }
     }
 
-    getGridParams(dim){
+    getGridParams(index){
         return {
-            "cols": dim,
-            "rows": dim,
+            "cols": this.grid_sizes[index].cols,
+            "rows": this.grid_sizes[index].rows,
             "max_value": 4,
             "max_value_step": 1,
             "increment_max_value": true,

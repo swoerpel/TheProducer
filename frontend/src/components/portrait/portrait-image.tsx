@@ -3,7 +3,7 @@ import { Utf8ArrayToStr } from '../../services/shared.service';
 
 @Component({
   tag: 'portrait-image',
-  styleUrl: 'portrait-image.css',
+  styleUrl: 'portrait-image.scss',
   shadow: true
 })
 
@@ -20,7 +20,6 @@ export class PortraitSVGComponent {
 
   @Watch('simulation_params')
   async refreshSVG(){
-    console.log('refresh')
     let method = 'POST';
     let url = 'http://localhost:8080/knight_trap_weave';
     this.svg = await this.sendHttpRequest(method,url,this.simulation_params);
