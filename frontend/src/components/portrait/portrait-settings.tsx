@@ -15,7 +15,6 @@ export class PortraitSettings {
     console.log('knightTrapWeaveService',knightTrapWeaveService)
   }
 
-  @Element() host: HTMLElement;
   
   @State() grid_size_index: number = 0;
   @State() color_palette: string = 'Spectral';

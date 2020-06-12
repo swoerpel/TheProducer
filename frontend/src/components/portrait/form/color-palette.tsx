@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Element } from '@stencil/core';
 import { Event, EventEmitter } from '@stencil/core';
 import { Utf8ArrayToStr } from '../../../services/shared.service';
 
@@ -8,15 +8,17 @@ import { Utf8ArrayToStr } from '../../../services/shared.service';
   shadow: true,
 })
 export class ColorPaletteList {
-
-  @State() color_palette: string = 'Spectral';
+  @Element() host: HTMLElement;
+  @State() color_palette_index: number = 118;
   @State() toggle_color_list : boolean = false;
   @Event() on_palette_select  : EventEmitter<string>;
 
   color_palette_list: {name:string, colors: string[]}[];
-
+  color_palette_svg: string;
   async componentWillLoad() {
+    
     this.color_palette_list = await this.getColorLibrary();
+    this.setColorPaletteSVG();
   }
 
   getColorLibrary = () => {
@@ -42,23 +44,31 @@ export class ColorPaletteList {
   }
 
   setColorPalette(event){
-    this.color_palette = this.color_palette_list[event.target.value].name
-    this.on_palette_select.emit(this.color_palette);
+    console.log('pal event',event.target.value)
+    this.color_palette_index = event.target.value
+    this.on_palette_select.emit(this.color_palette_list[event.target.value].name);
+    this.setColorPaletteSVG();
   }
 
-  // getTempSVG(){
-  //                     <svg width="10" height="10">
-  //                   <rect width="10" height="10" color="red" />
-  //                 </svg>
-  // }
+  setColorPaletteSVG(){
+    const rect_width = 25
+    const color_count = this.color_palette_list[this.color_palette_index].colors.length
+    this.color_palette_svg = `<svg width="${rect_width * color_count}" height="25">`
+    this.color_palette_list[this.color_palette_index].colors.forEach((color,index) => {
+      this.color_palette_svg += `<rect x="${index * rect_width}" width="25" height="25" style="fill:${color}" />`
+    })
+    this.color_palette_svg += `</svg>`
+  }
+
 
   render(){
     return (
         <div class='container'>
             <div class="container header">Color Palette</div>
-            <input value={this.color_palette} 
+            <input value={this.color_palette_list[this.color_palette_index].name} 
                 class='container input'
                 type="text"/>
+            <div innerHTML={this.color_palette_svg}></div>
             <select onInput={(event)=> this.setColorPalette(event)}>{
             this.color_palette_list.map((palette,index) =>
                 <option class="container option" value={index}>
@@ -70,5 +80,6 @@ export class ColorPaletteList {
         </div>
       );
   }
+
 
 }
