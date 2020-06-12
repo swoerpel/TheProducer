@@ -3,8 +3,9 @@ import { Event, EventEmitter } from '@stencil/core';
 import { Utf8ArrayToStr } from '../../../services/shared.service';
 
 @Component({
-	tag: 'color-palette-list',
-  styleUrl: 'color-palette-list.scss',
+	tag: 'form-color-palette',
+  styleUrl: 'color-palette.scss',
+  shadow: true,
 })
 export class ColorPaletteList {
 
@@ -40,24 +41,34 @@ export class ColorPaletteList {
      this.toggle_color_list = !this.toggle_color_list;
   }
 
-  setColorPalette(selected_palette){
-    this.on_palette_select.emit( selected_palette);
+  setColorPalette(event){
+    this.color_palette = this.color_palette_list[event.target.value].name
+    this.on_palette_select.emit(this.color_palette);
   }
 
-  render() {
+  // getTempSVG(){
+  //                     <svg width="10" height="10">
+  //                   <rect width="10" height="10" color="red" />
+  //                 </svg>
+  // }
+
+  render(){
     return (
-      <div class="container">
-        <h2 onClick={() => this. toggleColorListDropdown()}>
-          color palettes  {this.toggle_color_list ? <span>&#9650;</span> : <span>&#9660;</span>}
-        </h2> 
-        <div class={ this.toggle_color_list ? 'grid-container-active' : 'grid-container-inactive' }>
-          {this.color_palette_list.map(item => 
-          <li onClick={() => this.setColorPalette(item.name)}>
-            <div class="color-item">{item.name}</div>
-          </li>
-          )}
+        <div class='container'>
+            <div class="container header">Color Palette</div>
+            <input value={this.color_palette} 
+                class='container input'
+                type="text"/>
+            <select onInput={(event)=> this.setColorPalette(event)}>{
+            this.color_palette_list.map((palette,index) =>
+                <option class="container option" value={index}>
+                  {palette.name}
+                </option>
+            )
+            }
+            </select>
         </div>
-      </div>
-    )
+      );
   }
+
 }

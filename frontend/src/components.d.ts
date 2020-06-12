@@ -10,7 +10,7 @@ export namespace Components {
     }
     interface AppRoot {
     }
-    interface ColorPaletteList {
+    interface FormColorPalette {
     }
     interface FormGridSize {
     }
@@ -33,11 +33,11 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
-    interface HTMLColorPaletteListElement extends Components.ColorPaletteList, HTMLStencilElement {
+    interface HTMLFormColorPaletteElement extends Components.FormColorPalette, HTMLStencilElement {
     }
-    var HTMLColorPaletteListElement: {
-        prototype: HTMLColorPaletteListElement;
-        new (): HTMLColorPaletteListElement;
+    var HTMLFormColorPaletteElement: {
+        prototype: HTMLFormColorPaletteElement;
+        new (): HTMLFormColorPaletteElement;
     };
     interface HTMLFormGridSizeElement extends Components.FormGridSize, HTMLStencilElement {
     }
@@ -60,7 +60,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "app-portrait": HTMLAppPortraitElement;
         "app-root": HTMLAppRootElement;
-        "color-palette-list": HTMLColorPaletteListElement;
+        "form-color-palette": HTMLFormColorPaletteElement;
         "form-grid-size": HTMLFormGridSizeElement;
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
@@ -71,7 +71,7 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
-    interface ColorPaletteList {
+    interface FormColorPalette {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
     }
     interface FormGridSize {
@@ -87,7 +87,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "app-portrait": AppPortrait;
         "app-root": AppRoot;
-        "color-palette-list": ColorPaletteList;
+        "form-color-palette": FormColorPalette;
         "form-grid-size": FormGridSize;
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
@@ -99,7 +99,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-portrait": LocalJSX.AppPortrait & JSXBase.HTMLAttributes<HTMLAppPortraitElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "color-palette-list": LocalJSX.ColorPaletteList & JSXBase.HTMLAttributes<HTMLColorPaletteListElement>;
+            "form-color-palette": LocalJSX.FormColorPalette & JSXBase.HTMLAttributes<HTMLFormColorPaletteElement>;
             "form-grid-size": LocalJSX.FormGridSize & JSXBase.HTMLAttributes<HTMLFormGridSizeElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;

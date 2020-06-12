@@ -4,6 +4,7 @@ import { knightTrapWeaveService } from "../../../services/knight_trap_weave.serv
 @Component({
     tag: 'form-grid-size',
     styleUrl: 'grid-size.scss',
+    shadow: true
 })
 
 export class FormGridSize{
@@ -24,17 +25,18 @@ export class FormGridSize{
 
     render(){
         return (
-            <div class='grid-size'>
-            <input value={this.getGridSizeString(this.grid_size_index)} 
-            class='grid-size input'
-            type="text" />
-            <select onInput={(event)=> this.setGridSizeIndex(event)} id="grid-size" name="grid-sizes">{
-              knightTrapWeaveService.grid_sizes.map((grid_size,index) =>
-                 <option value={index}>{this.getGridSizeString(index)}</option>
-              )
-            }
-            </select>
-          </div>
+            <div class='container'>
+                <div class="container header">Grid Size</div>
+                <input value={this.getGridSizeString(this.grid_size_index)} 
+                    class='container input'
+                    type="text"/>
+                <select onInput={(event)=> this.setGridSizeIndex(event)} id="grid-size" name="grid-sizes">{
+                knightTrapWeaveService.grid_sizes.map((grid_size,index) =>
+                    <option class="container option" value={index}>{this.getGridSizeString(index)}</option>
+                )
+                }
+                </select>
+            </div>
         );
     }
 }
