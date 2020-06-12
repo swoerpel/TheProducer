@@ -1,6 +1,5 @@
-import { Component, h, State, Watch, Listen } from '@stencil/core';
-import { Event, Element, EventEmitter } from '@stencil/core';
-import { knightTrapWeaveService } from '../../services/knight_trap_weave.service';
+import { Component, h, State, Listen } from '@stencil/core';
+import { Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'portrait-settings',
@@ -10,17 +9,12 @@ import { knightTrapWeaveService } from '../../services/knight_trap_weave.service
 
 export class PortraitSettings {
 
-
-  constructor(){
-    console.log('knightTrapWeaveService',knightTrapWeaveService)
-  }
-
+  constructor(){}
   
   @State() grid_size_index: number = 0;
   @State() color_palette: string = 'Spectral';
 
   @Event() refresh_params: EventEmitter<Object>;
-
   @Event() on_color_list_toggle  : EventEmitter;
   
   @Listen('on_grid_size_select')  

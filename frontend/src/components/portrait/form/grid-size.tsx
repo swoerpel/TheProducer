@@ -27,9 +27,6 @@ export class FormGridSize{
         return (
             <div class='container'>
                 <div class="container header">Grid Size</div>
-                <input value={this.getGridSizeString(this.grid_size_index)} 
-                    class='container input'
-                    type="text"/>
                 <select onInput={(event)=> this.setGridSizeIndex(event)} id="grid-size" name="grid-sizes">{
                 knightTrapWeaveService.grid_sizes.map((grid_size,index) =>
                     <option class="container option" value={index}>{this.getGridSizeString(index)}</option>
