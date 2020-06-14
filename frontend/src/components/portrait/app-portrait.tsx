@@ -15,10 +15,8 @@ export class AppPortrait {
 
   @Listen('refresh_params')
   refreshImageParams(event: CustomEvent<any> = null){
-    if(!event)
-      this.image_params = knightTrapWeaveService.paramFactory();
-    else
-      this.image_params = knightTrapWeaveService.paramFactory(event.detail);
+    console.log('event',event.detail)
+    this.image_params = knightTrapWeaveService.convertParams();
   }
 
   render() {

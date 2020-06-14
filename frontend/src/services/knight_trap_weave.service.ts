@@ -27,28 +27,26 @@ class KnightTrapWeaveService {
             "random": true
         },
         weave:{
-            return {
-                "queue_length": 5,
-                "smooth":{
-                    "iter_start": 0,
-                    "iter_end": 8,
-                    "ratio":0.25
-                },
-                "on": true,
-                "alpha": 1,
-                "width":{
-                    "dynamic": true,
-                    "init":  0.5,
-                    "min": 0.25,
-                    "max": 1,
-                    "step": 0.25,
-                    "oss_freq": 1
-                },
-                "border":{
-                    "on": false,
-                    "width":0.1,
-                    "color": "black"
-                }
+            "queue_length": 5,
+            "smooth":{
+                "iter_start": 0,
+                "iter_end": 8,
+                "ratio":0.25
+            },
+            "on": true,
+            "alpha": 1,
+            "width":{
+                "dynamic": true,
+                "init":  0.5,
+                "min": 0.25,
+                "max": 1,
+                "step": 0.25,
+                "oss_freq": 1
+            },
+            "border":{
+                "on": false,
+                "width":0.1,
+                "color": "black"
             }
         },
         knight: {
@@ -80,14 +78,15 @@ class KnightTrapWeaveService {
 
     constructor() {}
 
-    paramFactory(options = {grid_size_index:0,color_palette:'Spectral'}){
+    convertParams(user_params = {}){
+        // converts user input params to api request params
         const params = {};
-        params['trap_count'] = 3;
-        params['canvas'] = this.getCanvasParams();
-        params['grid'] = this.getGridParams(options.grid_size_index);
-        params['knight'] = this.getKnightParams();
-        params['weave'] = this.getWeaveParams();
-        params['color']= this.getColorParams(options.color_palette);
+        params['trap_count'] = this.defaultParams.trap_count
+        params['canvas'] = this.defaultParams.canvas
+        params['grid'] = this.defaultParams.grid
+        params['knight'] = this.defaultParams.knight
+        params['weave'] = this.defaultParams.weave
+        params['color']= this.defaultParams.color
         return params;
     }
 
