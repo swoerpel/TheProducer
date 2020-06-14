@@ -78,17 +78,28 @@ class KnightTrapWeaveService {
 
     constructor() {}
 
-    convertParams(user_params = {}){
+    convertParams(user_params:any){
+        console.log('user_params',user_params,this.defaultParams.grid)
+        console.log('sdkolfjn',this.grid_sizes[user_params.grid_size_index])
         // converts user input params to api request params
         const params = {};
         params['trap_count'] = this.defaultParams.trap_count
         params['canvas'] = this.defaultParams.canvas
-        params['grid'] = this.defaultParams.grid
+        params['grid'] = {
+            ...this.defaultParams.grid,
+            rows: this.grid_sizes[user_params.grid_size_index].rows,
+            cols: this.grid_sizes[user_params.grid_size_index].rows,
+        }
         params['knight'] = this.defaultParams.knight
         params['weave'] = this.defaultParams.weave
         params['color']= this.defaultParams.color
         return params;
     }
+
+    convertGridSizeParams(user_grid_size){
+
+    }
+
 
     getCanvasParams(){
         return {
