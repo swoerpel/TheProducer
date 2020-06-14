@@ -12,7 +12,13 @@ export class PortraitSettings {
 
   constructor(){}
   
-  @State() user_input_params: any = {grid_size_index:0};
+  default_user_input = {
+    grid_size_index:0,
+    color_palette: 'Spectral'
+  }
+
+
+  @State() user_input_params = this.default_user_input
 
   emitRefreshParamsEvent_(){
     //causes svg refresh
@@ -79,12 +85,9 @@ export class PortraitSettings {
 
   @Listen('on_palette_select')
   setColorPalette(event){
-    this.color_palette = event.detail;
+    console.log('color pal',event.detail)
+    this.user_input_params.color_palette = event.detail;
   }
-
-
-
-
 
   render() {
     return (

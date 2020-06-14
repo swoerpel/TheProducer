@@ -12,7 +12,7 @@ class KnightTrapWeaveService {
         {rows:32,cols:32},
     ];
 
-    public defaultParams = {
+    public default_params = {
         trap_count: 4,
         canvas: {
             "width": 800,
@@ -78,102 +78,24 @@ class KnightTrapWeaveService {
 
     constructor() {}
 
+    // converts user input params to api request params
     convertParams(user_params:any){
-        console.log('user_params',user_params,this.defaultParams.grid)
-        console.log('sdkolfjn',this.grid_sizes[user_params.grid_size_index])
-        // converts user input params to api request params
+        console.log('user_params',user_params,)
         const params = {};
-        params['trap_count'] = this.defaultParams.trap_count
-        params['canvas'] = this.defaultParams.canvas
+        params['trap_count'] = this.default_params.trap_count
+        params['canvas'] = this.default_params.canvas
         params['grid'] = {
-            ...this.defaultParams.grid,
+            ...this.default_params.grid,
             rows: this.grid_sizes[user_params.grid_size_index].rows,
             cols: this.grid_sizes[user_params.grid_size_index].rows,
         }
-        params['knight'] = this.defaultParams.knight
-        params['weave'] = this.defaultParams.weave
-        params['color']= this.defaultParams.color
+        params['knight'] = this.default_params.knight
+        params['weave'] = this.default_params.weave
+        params['color']= {
+            ...this.default_params.color,
+            palette: user_params.color_palette,
+        }
         return params;
-    }
-
-    convertGridSizeParams(user_grid_size){
-
-    }
-
-
-    getCanvasParams(){
-        return {
-            "width": 800,
-            "height": 800
-        }
-    }
-
-    getGridParams(index){
-        return {
-            "cols": this.grid_sizes[index].cols,
-            "rows": this.grid_sizes[index].rows,
-            "max_value": 4,
-            "max_value_step": 1,
-            "increment_max_value": true,
-            "random": true
-        }
-    }
-
-    getKnightParams(){
-        return {
-            "init":{
-                "mode": "start",
-                "x": 18,
-                "y": 18
-            },
-            "jump":{
-                "x":1,
-                "y":1
-            },
-            "on": false,
-            "mode": "squares",
-            "alpha": 1,
-            "border":{
-                "on": false,
-                "width":0.0,
-                "color": "black",
-                "alpha":1
-            }
-        }
-    }
-
-    getWeaveParams(){
-        return {
-            "queue_length": 5,
-            "smooth":{
-                "iter_start": 0,
-                "iter_end": 8,
-                "ratio":0.25
-            },
-            "on": true,
-            "alpha": 1,
-            "width":{
-                "dynamic": true,
-                "init":  0.5,
-                "min": 0.25,
-                "max": 1,
-                "step": 0.25,
-                "oss_freq": 1
-            },
-            "border":{
-                "on": false,
-                "width":0.1,
-                "color": "black"
-            }
-        }
-    }
-
-    getColorParams(palette = 'Spectral'){
-        return {
-            "domain":12,
-            "palette": palette,
-            "background": "light-grey"
-        }
     }
 
 }

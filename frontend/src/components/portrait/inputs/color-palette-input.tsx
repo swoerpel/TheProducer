@@ -10,14 +10,18 @@ import { Utf8ArrayToStr } from '../../../services/shared.service';
 export class ColorPaletteList {
   @State() color_palette_index: number = 118; //spectral
   @State() toggle_color_list : boolean = false;
+  @State() hide_input: boolean = false;
+  @State() color_palette_name: string;
   @Event() on_palette_select  : EventEmitter<string>;
 
   color_palette_list: {name:string, colors: string[]}[];
-  color_palette_svg: string;
+  
   async componentWillLoad() {
     
     this.color_palette_list = await this.getColorLibrary();
-    this.setColorPaletteSVG();
+    console.log('color_palette_list',this.color_palette_list)
+    this.color_palette_name = this.color_palette_list[this.color_palette_index].name
+    // this.setColorPaletteSVG();
   }
 
   getColorLibrary = () => {
@@ -37,43 +41,54 @@ export class ColorPaletteList {
       });
     });
   }
-
-  toggleColorListDropdown(): void {
-     this.toggle_color_list = !this.toggle_color_list;
+  setColorPalette(palette_index){
+    this.color_palette_name = this.color_palette_list[palette_index].name
+    this.on_palette_select.emit(this.color_palette_name);
   }
 
-  setColorPalette(event){
-    console.log('pal event',event.target.value)
-    this.color_palette_index = event.target.value
-    this.on_palette_select.emit(this.color_palette_list[event.target.value].name);
-    this.setColorPaletteSVG();
-  }
-
-  setColorPaletteSVG(){
+  setColorPaletteSVG(palette_index){
     const square_len = 30
-    const color_count = this.color_palette_list[this.color_palette_index].colors.length
-    this.color_palette_svg = `<svg width="${square_len * color_count}" height="${square_len}">`
-    this.color_palette_list[this.color_palette_index].colors.forEach((color,index) => {
-      this.color_palette_svg += `<rect x="${index * square_len}" width="${square_len}" height="${square_len}" style="fill:${color}" />`
+    const color_count = this.color_palette_list[palette_index].colors.length
+    let color_palette_svg = `<svg width="${square_len * color_count}" height="${square_len}">`
+    this.color_palette_list[palette_index].colors.forEach((color,index) => {
+      color_palette_svg += `<rect x="${index * square_len}" width="${square_len}" height="${square_len}" style="fill:${color}" />`
     })
-    this.color_palette_svg += `</svg>`
+    color_palette_svg += `</svg>`
+    return color_palette_svg
+  }
+
+
+  toggleHideInputs(){
+    console.log('hide color palette input',this.hide_input)
+    this.hide_input = !this.hide_input;
   }
 
 
   render(){
     return (
-        <div class="container">
-          <div class="container header">Color Palette</div>
-          <select onInput={(event)=> this.setColorPalette(event)}>{
+      <div class='container'>
+      <div class="header-container">
+          <div class="header">Color Palette</div>
+          <input type="text" 
+                 onInput={(event)=> this.setColorPalette(event)}
+                 value={this.color_palette_name}>
+                   {this.color_palette_name}</input>
+          <button onClick={() =>this.toggleHideInputs()} class='show-hide-button'>
+              {this.hide_input ? 'show' : 'hide'}
+          </button>
+      </div>
+      <div class={this.hide_input ? 'input-container-hide':"input-container-show"}>
+      {
           this.color_palette_list.map((palette,index) => {
-            if(index === this.color_palette_index)
-              return <option class="container option" value={index} selected>{palette.name}</option>
-            else
-              return <option class="container option" value={index}>{palette.name}</option>
-            })}
-          </select>
-          <div class="palette-preview" innerHTML={this.color_palette_svg}></div>
-        </div>
+              return <div class="color-palette-container">
+                <div>{palette.name}</div>
+                <div class="palette-preview" innerHTML={this.setColorPaletteSVG(index)}></div>
+                <button onClick={() => this.setColorPalette(index)}>Select</button>
+              </div>
+          })}
+        
+      </div>
+      </div>
       );
   }
 

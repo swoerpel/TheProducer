@@ -1,14 +1,45 @@
+// .container{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+//     align-items: center;
+// }
+
+// .header{
+//     font-size: large;
+//     font-weight: bolder;
+// }
+
+// .palette-preview{
+// }
+
 .container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .header{
     font-size: large;
     font-weight: bolder;
+    cursor: pointer;
 }
 
-.palette-preview{
+.input-container-show{
+    display: flex;
+    flex-direction: column;
+}
+.input-container-hide{
+    display: none;
+}
+
+
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.color-palette-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
