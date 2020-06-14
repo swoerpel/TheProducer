@@ -94,7 +94,7 @@ declare namespace LocalJSX {
         "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
     interface WeaveInput {
-        "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
+        "onOn_weave_input_update"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "app-portrait": AppPortrait;

@@ -14,7 +14,10 @@ export class PortraitSettings {
   
   default_user_input = {
     grid_size_index:0,
-    color_palette: 'Spectral'
+    color_palette: 'Spectral',
+    weave:{
+      width_count:3,
+    }
   }
 
 
@@ -87,6 +90,12 @@ export class PortraitSettings {
   setColorPalette(event){
     console.log('color pal',event.detail)
     this.user_input_params.color_palette = event.detail;
+  }
+
+  @Listen('on_weave_input_update')
+  setWeaveParams(event){
+    console.log('weave_mcgee',event.detail)
+    this.user_input_params.weave = event.detail;
   }
 
   render() {

@@ -10,18 +10,15 @@ import { Utf8ArrayToStr } from '../../../services/shared.service';
 export class ColorPaletteList {
   @State() color_palette_index: number = 118; //spectral
   @State() toggle_color_list : boolean = false;
-  @State() hide_input: boolean = false;
+  @State() hide_input: boolean = true;
   @State() color_palette_name: string;
   @Event() on_palette_select  : EventEmitter<string>;
 
   color_palette_list: {name:string, colors: string[]}[];
   
   async componentWillLoad() {
-    
     this.color_palette_list = await this.getColorLibrary();
-    console.log('color_palette_list',this.color_palette_list)
     this.color_palette_name = this.color_palette_list[this.color_palette_index].name
-    // this.setColorPaletteSVG();
   }
 
   getColorLibrary = () => {
@@ -59,7 +56,6 @@ export class ColorPaletteList {
 
 
   toggleHideInputs(){
-    console.log('hide color palette input',this.hide_input)
     this.hide_input = !this.hide_input;
   }
 

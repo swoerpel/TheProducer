@@ -76,26 +76,40 @@ class KnightTrapWeaveService {
         }
     }
 
+
+
     constructor() {}
 
     // converts user input params to api request params
     convertParams(user_params:any){
         console.log('user_params',user_params,)
+        console.log('this.default_params.weave',this.default_params.weave)
         const params = {};
         params['trap_count'] = this.default_params.trap_count
-        params['canvas'] = this.default_params.canvas
+        params['canvas'] = {
+            ...this.default_params.canvas
+        }
         params['grid'] = {
             ...this.default_params.grid,
             rows: this.grid_sizes[user_params.grid_size_index].rows,
             cols: this.grid_sizes[user_params.grid_size_index].rows,
         }
-        params['knight'] = this.default_params.knight
-        params['weave'] = this.default_params.weave
+        params['knight'] = {
+            ...this.default_params.knight
+        }
+        params['weave'] = {
+            ...this.default_params.weave,
+            // width: setWeaveWidth(user_params.width_count)
+        }
         params['color']= {
             ...this.default_params.color,
             palette: user_params.color_palette,
         }
         return params;
+    }
+
+    setWeaveWidth(width_count){
+
     }
 
 }
