@@ -3,8 +3,8 @@ import { Event, EventEmitter } from '@stencil/core';
 import { Utf8ArrayToStr } from '../../../services/shared.service';
 
 @Component({
-	tag: 'form-color-palette',
-  styleUrl: 'color-palette.scss',
+	tag: 'color-palette-input',
+  styleUrl: 'color-palette-input.scss',
   shadow: true,
 })
 export class ColorPaletteList {

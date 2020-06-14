@@ -2,8 +2,8 @@ import { Component, h, State, EventEmitter, Event } from "@stencil/core";
 import { knightTrapWeaveService } from "../../../services/knight_trap_weave.service";
 
 @Component({
-    tag: 'form-grid-size',
-    styleUrl: 'grid-size.scss',
+    tag: 'grid-size-input',
+    styleUrl: 'grid-size-input.scss',
     shadow: true
 })
 

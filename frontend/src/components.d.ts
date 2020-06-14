@@ -10,14 +10,16 @@ export namespace Components {
     }
     interface AppRoot {
     }
-    interface FormColorPalette {
+    interface ColorPaletteInput {
     }
-    interface FormGridSize {
+    interface GridSizeInput {
     }
     interface PortraitImage {
         "simulation_params": any;
     }
     interface PortraitSettings {
+    }
+    interface WeaveInput {
     }
 }
 declare global {
@@ -33,17 +35,17 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
-    interface HTMLFormColorPaletteElement extends Components.FormColorPalette, HTMLStencilElement {
+    interface HTMLColorPaletteInputElement extends Components.ColorPaletteInput, HTMLStencilElement {
     }
-    var HTMLFormColorPaletteElement: {
-        prototype: HTMLFormColorPaletteElement;
-        new (): HTMLFormColorPaletteElement;
+    var HTMLColorPaletteInputElement: {
+        prototype: HTMLColorPaletteInputElement;
+        new (): HTMLColorPaletteInputElement;
     };
-    interface HTMLFormGridSizeElement extends Components.FormGridSize, HTMLStencilElement {
+    interface HTMLGridSizeInputElement extends Components.GridSizeInput, HTMLStencilElement {
     }
-    var HTMLFormGridSizeElement: {
-        prototype: HTMLFormGridSizeElement;
-        new (): HTMLFormGridSizeElement;
+    var HTMLGridSizeInputElement: {
+        prototype: HTMLGridSizeInputElement;
+        new (): HTMLGridSizeInputElement;
     };
     interface HTMLPortraitImageElement extends Components.PortraitImage, HTMLStencilElement {
     }
@@ -57,13 +59,20 @@ declare global {
         prototype: HTMLPortraitSettingsElement;
         new (): HTMLPortraitSettingsElement;
     };
+    interface HTMLWeaveInputElement extends Components.WeaveInput, HTMLStencilElement {
+    }
+    var HTMLWeaveInputElement: {
+        prototype: HTMLWeaveInputElement;
+        new (): HTMLWeaveInputElement;
+    };
     interface HTMLElementTagNameMap {
         "app-portrait": HTMLAppPortraitElement;
         "app-root": HTMLAppRootElement;
-        "form-color-palette": HTMLFormColorPaletteElement;
-        "form-grid-size": HTMLFormGridSizeElement;
+        "color-palette-input": HTMLColorPaletteInputElement;
+        "grid-size-input": HTMLGridSizeInputElement;
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
+        "weave-input": HTMLWeaveInputElement;
     }
 }
 declare namespace LocalJSX {
@@ -71,10 +80,10 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
-    interface FormColorPalette {
+    interface ColorPaletteInput {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
     }
-    interface FormGridSize {
+    interface GridSizeInput {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
     }
     interface PortraitImage {
@@ -84,13 +93,17 @@ declare namespace LocalJSX {
         "onOn_color_list_toggle"?: (event: CustomEvent<any>) => void;
         "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
+    interface WeaveInput {
+        "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
+    }
     interface IntrinsicElements {
         "app-portrait": AppPortrait;
         "app-root": AppRoot;
-        "form-color-palette": FormColorPalette;
-        "form-grid-size": FormGridSize;
+        "color-palette-input": ColorPaletteInput;
+        "grid-size-input": GridSizeInput;
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
+        "weave-input": WeaveInput;
     }
 }
 export { LocalJSX as JSX };
@@ -99,10 +112,11 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-portrait": LocalJSX.AppPortrait & JSXBase.HTMLAttributes<HTMLAppPortraitElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "form-color-palette": LocalJSX.FormColorPalette & JSXBase.HTMLAttributes<HTMLFormColorPaletteElement>;
-            "form-grid-size": LocalJSX.FormGridSize & JSXBase.HTMLAttributes<HTMLFormGridSizeElement>;
+            "color-palette-input": LocalJSX.ColorPaletteInput & JSXBase.HTMLAttributes<HTMLColorPaletteInputElement>;
+            "grid-size-input": LocalJSX.GridSizeInput & JSXBase.HTMLAttributes<HTMLGridSizeInputElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;
+            "weave-input": LocalJSX.WeaveInput & JSXBase.HTMLAttributes<HTMLWeaveInputElement>;
         }
     }
 }

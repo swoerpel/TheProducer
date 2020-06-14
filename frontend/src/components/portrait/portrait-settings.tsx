@@ -47,8 +47,9 @@ export class PortraitSettings {
       <div class="container">
         <div class="container header">Image Settings</div>
         <form class='settings' onSubmit={(e)=>this.handleRefreshParams(e)}>
-          <form-grid-size></form-grid-size>
-          <form-color-palette></form-color-palette>
+          <grid-size-input></grid-size-input>
+          <color-palette-input></color-palette-input>
+          <weave-input></weave-input>
           <input class="refresh-button" type="submit" value="Submit" />
         </form>
       </div>
