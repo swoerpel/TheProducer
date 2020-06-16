@@ -1,4 +1,4 @@
-import { Component, h, State, Listen } from '@stencil/core';
+import { Component, h, State, Listen, Element } from '@stencil/core';
 import { Event, EventEmitter } from '@stencil/core';
 import { knightTrapWeaveService } from '../../services/knight_trap_weave.service';
 
@@ -10,9 +10,11 @@ import { knightTrapWeaveService } from '../../services/knight_trap_weave.service
 
 export class PortraitSettings {
 
+  @Element() host: HTMLElement;
+
   constructor(){}
   
-  default_user_input = {
+  private default_user_input = {
     grid_size_index:0,
     color_palette: 'Spectral',
     weave:{
@@ -24,14 +26,20 @@ export class PortraitSettings {
     }
   }
 
-
   @State() user_input_params = this.default_user_input
+  @State() grid_size_index: number = 0;
+  @State() color_palette: string = 'Spectral';
 
-  emitRefreshParamsEvent_(){
-    //causes svg refresh
-    console.log('new refresh params event')
-    this.refresh_params.emit(this.user_input_params)
-  }
+  @Event() refresh_params: EventEmitter<Object>;
+  @Event() on_color_list_toggle  : EventEmitter;
+
+  private tab_ids: string[] = [
+    'draw',
+    'grid',
+    'weave',
+    'knight',
+    'color'
+  ]
 
   componentDidLoad() {
     this.refresh_params.emit(this.user_input_params)
@@ -40,47 +48,8 @@ export class PortraitSettings {
   handleRefreshParams(e) {
     e.preventDefault();
     this.refresh_params.emit(this.user_input_params)
-
-    // this.refresh_params.emit({
-    //   grid_size_index: this.grid_size_index,
-    //   color_palette: this.color_palette
-    // })
   }
 
-  // componentDidLoad() {
-  //   this.refresh_params.emit({
-  //     grid_size_index: this.grid_size_index,
-  //     color_palette: this.color_palette
-  //   })
-  // }
-
-
-  // @Listen('on_grid_input_change')
-  // setGridInput(){
-
-  // }
-  // @Listen('on_color_input_change')
-  // setColorInput(){
-    
-  // }
-
-  // @Listen('on_knight_input_change')
-  // setKnightInput(){
-    
-  // }
-  // @Listen('on_trap_count_input_change')
-  // setTrapCountInput(){
-    
-  // }
-
-
-
-  @State() grid_size_index: number = 0;
-  @State() color_palette: string = 'Spectral';
-
-  @Event() refresh_params: EventEmitter<Object>;
-  @Event() on_color_list_toggle  : EventEmitter;
-  
   @Listen('on_grid_size_select')  
   setGridSize(event){
     this.user_input_params.grid_size_index = event.detail;
@@ -93,21 +62,48 @@ export class PortraitSettings {
 
   @Listen('on_weave_input_change')
   setWeaveInput(event){
-    console.log('in portrait settings',event.detail.width)
     this.user_input_params.weave = event.detail;
+  }
+
+  onTabSelect(selected_tab,tab_id) {
+    this.tab_ids.filter((id) => id !== tab_id).forEach((tab_id) => { 
+      let tab_element = this.host.shadowRoot.getElementById(tab_id + '-tab')
+      tab_element.style['background-color'] = 'black';
+      tab_element.style['color'] = 'white';
+      let tab_content_element = this.host.shadowRoot.getElementById(tab_id);
+      tab_content_element.style.display = "none"
+    })
+    this.host.shadowRoot.getElementById(tab_id).style.display = "flex";
+    selected_tab.style['background-color'] = '#ddd';
+    selected_tab.style['color'] = 'black';
   }
 
   render() {
     return (
       <div class="container">
-        <div class="container header">Image Settings</div>
-        <form class='settings' onSubmit={(e)=>this.handleRefreshParams(e)}>
-          <grid-size-input></grid-size-input>
-          <color-palette-input></color-palette-input>
-          <weave-input></weave-input>
-          <input class="refresh-button" type="submit" value="Submit" />
-        </form>
+        <div class="header">Image Settings</div>
+        <div class="nav-bar">
+          <div id="draw-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'draw')}>Draw</div>
+          <div id="grid-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'grid')}>Grid</div>
+          <div id="weave-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'weave')}>Weave</div>
+          <div id="knight-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'knight')}>Knight</div>
+          <div id="color-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'color')}>Color</div>
+        </div>
+        <div id="draw" class="nav-tab-content">Draw</div>
+        <div id="grid" class="nav-tab-content">Grid</div>
+        <div id="weave" class="nav-tab-content">Weave</div>
+        <div id="knight" class="nav-tab-content">Knight</div>
+        <div id="color" class="nav-tab-content">Color</div>
       </div>
     );
   }
 }
+
+        // <form class='settings' onSubmit={(e)=>this.handleRefreshParams(e)}>
+          
+        //   <grid-size-input></grid-size-input>
+        //   <color-palette-input></color-palette-input>
+        //   <weave-input></weave-input>
+        //   <input class="refresh-button" type="submit" value="Submit" />
+        // </form>
+        

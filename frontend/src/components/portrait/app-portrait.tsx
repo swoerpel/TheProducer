@@ -25,9 +25,10 @@ export class AppPortrait {
           <portrait-image simulation_params={this.image_params}></portrait-image>
         </div>
         <div class='portrait-settings'>
-          <portrait-settings></portrait-settings>
+          <portrait-settings></portrait-settings>        
         </div>
       </div>
     );
   }
 }
+

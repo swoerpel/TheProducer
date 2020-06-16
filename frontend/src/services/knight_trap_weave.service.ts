@@ -12,12 +12,6 @@ class KnightTrapWeaveService {
         {rows:32,cols:32},
     ];
 
-    public weave_settings = [
-        {
-            
-        }
-    ]
-
 
     public default_params = {
         trap_count: 4,

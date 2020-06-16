@@ -17,7 +17,6 @@ export class FormGridSize{
     @State() width_high: number = 100;
     @State() width_divisions: number = 3;
 
-
     getGridSizeString(index){
         const r = knightTrapWeaveService.grid_sizes[index].rows
         const c = knightTrapWeaveService.grid_sizes[index].cols

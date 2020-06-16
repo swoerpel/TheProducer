@@ -1,0 +1,97 @@
+Bug/Refactor/Improvement List
+
+- move default object to KTW service
+- Determine which inputs are user inputs
+- remove magic numbers
+- create model for API request
+- data model for user input is very vague
+- CSS is in shambles, should be using nesting
+- descriptions of inputs
+	- on question mark click in "ZONE
+
+
+User Input Overview: Portrait Mode
+
+general layout:
+five tabs labeled DRAW, GRID, WEAVE, KNIGHT, COLOR with icons each with a unique color
+each tab (when opened) has a small question mark which displays help tooltip on
+hover for that section of settings.
+
+DRAW:
+    desc - Holds groups of switches which turn on and off draw features described
+        in the other tabs, this gives the user a chance to get an idea for which 
+        settings do what.
+    visual - animated toggle switches wrapped in colored zones coorsponding to
+            tab colors.
+
+GRID:
+
+    size 
+        desc - number of rows and columns of grid for knight to jump
+        visual - dropdown with grid sizes and custom [w,h] field, includes warning
+                 for slow load time when large grid sizes entered (64+), custom field
+                 is populated on size select with selected value
+
+        
+    population
+        desc - how each cell in the grid get its value, select a mode
+        visual - dropdown with each option, ideally a preview an SVG grid
+
+    trap count (image density)
+        desc - how many iterations the knight goes on before the image is complete
+        visual - radio buttons with low, medium, and high density, includes warning
+                 on high for long generation wait time
+
+WEAVE:
+
+    width
+        desc - the range of possible widths a weave-section* can take as well as
+               how the weave-section widths change with time
+        visual - four parallel sliders representing the following properties in order
+                min width of weave-sections (sliding above max slider value disabled)
+                max width of weave-sections (sliding above min slider value disabled)
+                number of intermediate widths of weave-sections (discrete integer steps)
+                osscilation frequency of width changes, (slow <-> fast)
+                
+    smooth
+        desc - drawing styles for the weave
+        visual - radio buttons         
+
+KNIGHT: 
+desc - settings having to deal with how the knight moves. It requires more user knowledge
+       of the simulation.
+
+    start point
+        desc - where the knight begins its tour, and also where the knight returns to upon trap 
+        visual - a text input field and a dropdown consisting of beginning, 
+                 middle, end, random, custom, where custom is enterd by user in text input.
+                 otherwise if any other dropdown value is selected, text input is read only.
+
+    jump
+        desc - shape of turns of the weave grid, can also determine size of holes. This parameter
+               can currently break the API if jump size is wider than grid.
+        visual - drop down of a x b coordinates as well as a text field for custom jump sizes
+
+COLOR:
+
+    domain
+        desc - how fast the colors change per weave drawn, higher numbers means smoother colors
+        visual - slider ranging from choppy to smooth with the value in a text box next to it
+    
+    background
+        desc - what color the background is
+        visual - colored square which brings up color picker modal including black, white, and all
+                 colors of the currently selected color palette
+    
+    palette
+        desc - currently color palette that is selected as well as a grid of every existing color palette
+               palettes are selected and the name of the palette appears in a textbox
+        visual - 3xN grid of color palette cells, each with five colored squares representing the palette,
+                 row above grid has place for existing color palette and text area for color palette name
+
+
+
+
+Roadmap for implementation
+
+1. get tab nav pages setup with divs
