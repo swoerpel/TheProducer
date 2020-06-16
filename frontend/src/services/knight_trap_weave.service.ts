@@ -12,6 +12,13 @@ class KnightTrapWeaveService {
         {rows:32,cols:32},
     ];
 
+    public weave_settings = [
+        {
+            
+        }
+    ]
+
+
     public default_params = {
         trap_count: 4,
         canvas: {
@@ -84,6 +91,8 @@ class KnightTrapWeaveService {
     convertParams(user_params:any){
         console.log('user_params',user_params,)
         console.log('this.default_params.weave',this.default_params.weave)
+        // if(!user_params.weave)
+        
         const params = {};
         params['trap_count'] = this.default_params.trap_count
         params['canvas'] = {
@@ -99,6 +108,7 @@ class KnightTrapWeaveService {
         }
         params['weave'] = {
             ...this.default_params.weave,
+            width: this.convertWeaveParams(user_params.weave)
             // width: setWeaveWidth(user_params.width_count)
         }
         params['color']= {
@@ -108,8 +118,18 @@ class KnightTrapWeaveService {
         return params;
     }
 
-    setWeaveWidth(width_count){
-
+    convertWeaveParams(weave_params){
+        const min = weave_params.width.low / 100;
+        const max = weave_params.width.high / 100;
+        const step = (max - min) / (weave_params.width.divisions - 1)
+        return {
+            dynamic: true,
+            init: (min + max) / 2,
+            min: min,
+            max: max,
+            oss_freq: 1,
+            step: step
+        }
     }
 
 }

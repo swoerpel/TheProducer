@@ -16,7 +16,11 @@ export class PortraitSettings {
     grid_size_index:0,
     color_palette: 'Spectral',
     weave:{
-      width_count:3,
+      width:{
+        low: 25,
+        high: 100,
+        divisions: 3,
+      }
     }
   }
 
@@ -52,23 +56,20 @@ export class PortraitSettings {
 
 
   // @Listen('on_grid_input_change')
-  // function setGridInput(){
+  // setGridInput(){
 
   // }
   // @Listen('on_color_input_change')
-  // function setColorInput(){
+  // setColorInput(){
     
   // }
-  // @Listen('on_weave_input_change')
-  // function setWeaveInput(){
-    
-  // }
+
   // @Listen('on_knight_input_change')
-  // function setKnightInput(){
+  // setKnightInput(){
     
   // }
   // @Listen('on_trap_count_input_change')
-  // function setTrapCountInput(){
+  // setTrapCountInput(){
     
   // }
 
@@ -82,19 +83,17 @@ export class PortraitSettings {
   
   @Listen('on_grid_size_select')  
   setGridSize(event){
-    console.log('set_grid_size', event.detail)
     this.user_input_params.grid_size_index = event.detail;
   }
 
   @Listen('on_palette_select')
   setColorPalette(event){
-    console.log('color pal',event.detail)
     this.user_input_params.color_palette = event.detail;
   }
 
-  @Listen('on_weave_input_update')
-  setWeaveParams(event){
-    console.log('weave_mcgee',event.detail)
+  @Listen('on_weave_input_change')
+  setWeaveInput(event){
+    console.log('in portrait settings',event.detail.width)
     this.user_input_params.weave = event.detail;
   }
 

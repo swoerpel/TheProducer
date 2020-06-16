@@ -1,5 +1,7 @@
 import { Component, h, State, EventEmitter, Event } from "@stencil/core";
 import { knightTrapWeaveService } from "../../../services/knight_trap_weave.service";
+// import { noUiSlider } from 'nouislider';
+import 'nouislider/distribute/nouislider.css';
 
 @Component({
     tag: 'weave-input',
@@ -8,10 +10,12 @@ import { knightTrapWeaveService } from "../../../services/knight_trap_weave.serv
 })
 
 export class FormGridSize{
-    
-    @Event() on_weave_input_update  : EventEmitter<any>;
+
+    @Event() on_weave_input_change  : EventEmitter<any>;
     @State() hide_inputs = false;
-    @State() width_count: number = 3;
+    @State() width_low: number = 25;
+    @State() width_high: number = 100;
+    @State() width_divisions: number = 3;
 
 
     getGridSizeString(index){
@@ -21,15 +25,25 @@ export class FormGridSize{
       }
 
     toggleHideInputs(){
-        console.log('this.hide_inputs',this.hide_inputs)
         this.hide_inputs = !this.hide_inputs;
     }
 
-    setWidthCount(event){
-        console.log('width_count',event.data)
-        this.on_weave_input_update.emit({
-            width_count: event.data
-        })
+    setWidthValue(event, field){
+        if(event.data){
+            if(field === 'low')
+                this.width_low =  parseInt(event.target.value)
+            if(field === 'high')
+                this.width_high =  parseInt(event.target.value)
+            if(field === 'divisions')
+                this.width_divisions =  parseInt(event.target.value)
+            this.on_weave_input_change.emit({
+                width:{
+                    low:this.width_low,
+                    high: this.width_high,
+                    divisions: this.width_divisions,
+                }
+            })
+        }
     }
 
     render(){
@@ -43,14 +57,29 @@ export class FormGridSize{
                 </div>
                 <div class={this.hide_inputs ? 'input-container-hide':"input-container-show"}>
                     <div class="width-input-container">
-                        <div class="sub-header">Width Count</div>
+                        <div class="sub-header"><strong>Width: </strong></div>
+                        <div class="sub-header"> Low:</div>
                         <input type="text" 
-                               onInput={(event)=> this.setWidthCount(event)}
-                               value={this.width_count}>
-                            {this.width_count}
+                               class="width-input" 
+                               onInput={(event)=> this.setWidthValue(event,'low')} 
+                               value={this.width_low}> 
+                            {this.width_low}
+                        </input>
+                        <div class="sub-header"> High:</div>
+                        <input type="text" 
+                               class="width-input" 
+                               onInput={(event)=> this.setWidthValue(event,'high')} 
+                               value={this.width_high}> 
+                            {this.width_high}
+                        </input>
+                        <div class="sub-header"> Divisions:</div>
+                        <input type="text" 
+                               class="width-input" 
+                               onInput={(event)=> this.setWidthValue(event,'divisions')} 
+                               value={this.width_divisions}> 
+                            {this.width_divisions}
                         </input>
                     </div>
-                    <div class="smooth-input-container"><div class="header">smooth settings</div></div>
                 </div>
             </div>
         );
