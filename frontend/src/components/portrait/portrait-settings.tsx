@@ -89,11 +89,14 @@ export class PortraitSettings {
           <div id="knight-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'knight')}>Knight</div>
           <div id="color-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'color')}>Color</div>
         </div>
-        <div id="draw" class="nav-tab-content">Draw</div>
-        <div id="grid" class="nav-tab-content">Grid</div>
-        <div id="weave" class="nav-tab-content">Weave</div>
-        <div id="knight" class="nav-tab-content">Knight</div>
-        <div id="color" class="nav-tab-content">Color</div>
+        <div class="content-container">
+          <div id="draw" class="nav-tab-content">Draw</div>
+          <div id="grid" class="nav-tab-content"><grid-tab></grid-tab></div>
+          <div id="weave" class="nav-tab-content">Weave</div>
+          <div id="knight" class="nav-tab-content">Knight</div>
+          <div id="color" class="nav-tab-content">Color</div>
+          <input class="refresh-button" type="submit" value="Submit" />
+        </div>
       </div>
     );
   }

@@ -14,6 +14,8 @@ export namespace Components {
     }
     interface GridSizeInput {
     }
+    interface GridTab {
+    }
     interface PortraitImage {
         "simulation_params": any;
     }
@@ -47,6 +49,12 @@ declare global {
         prototype: HTMLGridSizeInputElement;
         new (): HTMLGridSizeInputElement;
     };
+    interface HTMLGridTabElement extends Components.GridTab, HTMLStencilElement {
+    }
+    var HTMLGridTabElement: {
+        prototype: HTMLGridTabElement;
+        new (): HTMLGridTabElement;
+    };
     interface HTMLPortraitImageElement extends Components.PortraitImage, HTMLStencilElement {
     }
     var HTMLPortraitImageElement: {
@@ -70,6 +78,7 @@ declare global {
         "app-root": HTMLAppRootElement;
         "color-palette-input": HTMLColorPaletteInputElement;
         "grid-size-input": HTMLGridSizeInputElement;
+        "grid-tab": HTMLGridTabElement;
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
         "weave-input": HTMLWeaveInputElement;
@@ -84,6 +93,9 @@ declare namespace LocalJSX {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
     }
     interface GridSizeInput {
+        "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
+    }
+    interface GridTab {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
     }
     interface PortraitImage {
@@ -101,6 +113,7 @@ declare namespace LocalJSX {
         "app-root": AppRoot;
         "color-palette-input": ColorPaletteInput;
         "grid-size-input": GridSizeInput;
+        "grid-tab": GridTab;
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
         "weave-input": WeaveInput;
@@ -114,6 +127,7 @@ declare module "@stencil/core" {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "color-palette-input": LocalJSX.ColorPaletteInput & JSXBase.HTMLAttributes<HTMLColorPaletteInputElement>;
             "grid-size-input": LocalJSX.GridSizeInput & JSXBase.HTMLAttributes<HTMLGridSizeInputElement>;
+            "grid-tab": LocalJSX.GridTab & JSXBase.HTMLAttributes<HTMLGridTabElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;
             "weave-input": LocalJSX.WeaveInput & JSXBase.HTMLAttributes<HTMLWeaveInputElement>;

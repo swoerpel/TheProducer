@@ -83,8 +83,8 @@ class KnightTrapWeaveService {
 
     // converts user input params to api request params
     convertParams(user_params:any){
-        console.log('user_params',user_params,)
-        console.log('this.default_params.weave',this.default_params.weave)
+        // console.log('user_params',user_params,)
+        // console.log('this.default_params.weave',this.default_params.weave)
         // if(!user_params.weave)
         
         const params = {};
