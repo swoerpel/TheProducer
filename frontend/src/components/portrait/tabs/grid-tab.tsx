@@ -7,8 +7,7 @@ import { knightTrapWeaveService } from "../../../services/knight_trap_weave.serv
     shadow: true
 })
 
-export class FormGridSize{
-    
+export class GridTab{
 
     private population_modes = [
         'random',

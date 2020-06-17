@@ -23,6 +23,8 @@ export namespace Components {
     }
     interface WeaveInput {
     }
+    interface WeaveTab {
+    }
 }
 declare global {
     interface HTMLAppPortraitElement extends Components.AppPortrait, HTMLStencilElement {
@@ -73,6 +75,12 @@ declare global {
         prototype: HTMLWeaveInputElement;
         new (): HTMLWeaveInputElement;
     };
+    interface HTMLWeaveTabElement extends Components.WeaveTab, HTMLStencilElement {
+    }
+    var HTMLWeaveTabElement: {
+        prototype: HTMLWeaveTabElement;
+        new (): HTMLWeaveTabElement;
+    };
     interface HTMLElementTagNameMap {
         "app-portrait": HTMLAppPortraitElement;
         "app-root": HTMLAppRootElement;
@@ -82,6 +90,7 @@ declare global {
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
         "weave-input": HTMLWeaveInputElement;
+        "weave-tab": HTMLWeaveTabElement;
     }
 }
 declare namespace LocalJSX {
@@ -108,6 +117,8 @@ declare namespace LocalJSX {
     interface WeaveInput {
         "onOn_weave_input_change"?: (event: CustomEvent<any>) => void;
     }
+    interface WeaveTab {
+    }
     interface IntrinsicElements {
         "app-portrait": AppPortrait;
         "app-root": AppRoot;
@@ -117,6 +128,7 @@ declare namespace LocalJSX {
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
         "weave-input": WeaveInput;
+        "weave-tab": WeaveTab;
     }
 }
 export { LocalJSX as JSX };
@@ -131,6 +143,7 @@ declare module "@stencil/core" {
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;
             "weave-input": LocalJSX.WeaveInput & JSXBase.HTMLAttributes<HTMLWeaveInputElement>;
+            "weave-tab": LocalJSX.WeaveTab & JSXBase.HTMLAttributes<HTMLWeaveTabElement>;
         }
     }
 }
