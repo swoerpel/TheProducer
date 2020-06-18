@@ -6,13 +6,18 @@
 .section-header{
     font-size: large;
     font-weight: 600;
+    min-width: 100px;
 }
 
 .input-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+}
+
+.sub-input-container{
+    display: flex;
+    flex-grow: 1;
 }
 
 .size-value{
@@ -25,7 +30,7 @@
 
 .density-slider-container{
     display:flex;
-    width: 200px;
+    flex-grow: 1;
 }
 
 .density-slider {

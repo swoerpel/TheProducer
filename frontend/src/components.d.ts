@@ -12,6 +12,8 @@ export namespace Components {
     }
     interface ColorPaletteInput {
     }
+    interface DrawTab {
+    }
     interface GridSizeInput {
     }
     interface GridTab {
@@ -20,6 +22,12 @@ export namespace Components {
         "simulation_params": any;
     }
     interface PortraitSettings {
+    }
+    interface SliderInput {
+        "slider_init": number;
+        "slider_max": number;
+        "slider_min": number;
+        "title": string;
     }
     interface WeaveInput {
     }
@@ -45,6 +53,12 @@ declare global {
         prototype: HTMLColorPaletteInputElement;
         new (): HTMLColorPaletteInputElement;
     };
+    interface HTMLDrawTabElement extends Components.DrawTab, HTMLStencilElement {
+    }
+    var HTMLDrawTabElement: {
+        prototype: HTMLDrawTabElement;
+        new (): HTMLDrawTabElement;
+    };
     interface HTMLGridSizeInputElement extends Components.GridSizeInput, HTMLStencilElement {
     }
     var HTMLGridSizeInputElement: {
@@ -69,6 +83,12 @@ declare global {
         prototype: HTMLPortraitSettingsElement;
         new (): HTMLPortraitSettingsElement;
     };
+    interface HTMLSliderInputElement extends Components.SliderInput, HTMLStencilElement {
+    }
+    var HTMLSliderInputElement: {
+        prototype: HTMLSliderInputElement;
+        new (): HTMLSliderInputElement;
+    };
     interface HTMLWeaveInputElement extends Components.WeaveInput, HTMLStencilElement {
     }
     var HTMLWeaveInputElement: {
@@ -85,10 +105,12 @@ declare global {
         "app-portrait": HTMLAppPortraitElement;
         "app-root": HTMLAppRootElement;
         "color-palette-input": HTMLColorPaletteInputElement;
+        "draw-tab": HTMLDrawTabElement;
         "grid-size-input": HTMLGridSizeInputElement;
         "grid-tab": HTMLGridTabElement;
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
+        "slider-input": HTMLSliderInputElement;
         "weave-input": HTMLWeaveInputElement;
         "weave-tab": HTMLWeaveTabElement;
     }
@@ -100,6 +122,8 @@ declare namespace LocalJSX {
     }
     interface ColorPaletteInput {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
+    }
+    interface DrawTab {
     }
     interface GridSizeInput {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
@@ -114,6 +138,12 @@ declare namespace LocalJSX {
         "onOn_color_list_toggle"?: (event: CustomEvent<any>) => void;
         "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
+    interface SliderInput {
+        "slider_init"?: number;
+        "slider_max"?: number;
+        "slider_min"?: number;
+        "title"?: string;
+    }
     interface WeaveInput {
         "onOn_weave_input_change"?: (event: CustomEvent<any>) => void;
     }
@@ -123,10 +153,12 @@ declare namespace LocalJSX {
         "app-portrait": AppPortrait;
         "app-root": AppRoot;
         "color-palette-input": ColorPaletteInput;
+        "draw-tab": DrawTab;
         "grid-size-input": GridSizeInput;
         "grid-tab": GridTab;
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
+        "slider-input": SliderInput;
         "weave-input": WeaveInput;
         "weave-tab": WeaveTab;
     }
@@ -138,10 +170,12 @@ declare module "@stencil/core" {
             "app-portrait": LocalJSX.AppPortrait & JSXBase.HTMLAttributes<HTMLAppPortraitElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "color-palette-input": LocalJSX.ColorPaletteInput & JSXBase.HTMLAttributes<HTMLColorPaletteInputElement>;
+            "draw-tab": LocalJSX.DrawTab & JSXBase.HTMLAttributes<HTMLDrawTabElement>;
             "grid-size-input": LocalJSX.GridSizeInput & JSXBase.HTMLAttributes<HTMLGridSizeInputElement>;
             "grid-tab": LocalJSX.GridTab & JSXBase.HTMLAttributes<HTMLGridTabElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;
+            "slider-input": LocalJSX.SliderInput & JSXBase.HTMLAttributes<HTMLSliderInputElement>;
             "weave-input": LocalJSX.WeaveInput & JSXBase.HTMLAttributes<HTMLWeaveInputElement>;
             "weave-tab": LocalJSX.WeaveTab & JSXBase.HTMLAttributes<HTMLWeaveTabElement>;
         }

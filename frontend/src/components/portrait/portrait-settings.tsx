@@ -90,7 +90,7 @@ export class PortraitSettings {
           <div id="color-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'color')}>Color</div>
         </div>
         <div class="content-container">
-          <div id="draw" class="nav-tab-content">Draw</div>
+          <div id="draw" class="nav-tab-content"><draw-tab></draw-tab></div>
           <div id="grid" class="nav-tab-content"><grid-tab></grid-tab></div>
           <div id="weave" class="nav-tab-content"><weave-tab></weave-tab></div>
           <div id="knight" class="nav-tab-content">Knight</div>

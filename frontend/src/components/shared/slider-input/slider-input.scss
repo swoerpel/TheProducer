@@ -1,0 +1,71 @@
+
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-container{
+    display: flex;
+    height: 24px;
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.header-container{
+    background-color: black;
+    flex-grow: 2;
+    padding-left: 8px;
+}
+
+.value-container{
+    background-color: black;
+    flex: 1;
+    justify-content: center;
+}
+
+.slider-container{
+    background-color: black;
+    flex-grow: 3;
+    justify-content: center;
+}
+
+.header{
+    font-size: large;
+    font-weight: 600;
+    color: white;
+}
+
+.value{
+    width: 80%;
+    border-radius: 5px;
+    padding: 2px;
+    text-align: center;
+    border: none;
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    height: 24px; /* Specified height */
+    outline: none; /* Remove outline */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    width: 96%;
+    margin:0px;
+    
+}
+
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 24px; /* Set a specific slider handle width */
+    height: 24px; /* Slider handle height */
+    background: black; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    background-color: darkorange;
+}
