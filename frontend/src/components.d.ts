@@ -23,9 +23,13 @@ export namespace Components {
     }
     interface PortraitSettings {
     }
+    interface RadioButtonInput {
+        "button_group_data": string[];
+        "button_group_title": string;
+        "onButtonSelect": Function;
+    }
     interface SliderInput {
-        "onSliderValueChange": Function;
-        "slider_id": string;
+        "onValueChange": Function;
         "slider_init": number;
         "slider_max": number;
         "slider_min": number;
@@ -85,6 +89,12 @@ declare global {
         prototype: HTMLPortraitSettingsElement;
         new (): HTMLPortraitSettingsElement;
     };
+    interface HTMLRadioButtonInputElement extends Components.RadioButtonInput, HTMLStencilElement {
+    }
+    var HTMLRadioButtonInputElement: {
+        prototype: HTMLRadioButtonInputElement;
+        new (): HTMLRadioButtonInputElement;
+    };
     interface HTMLSliderInputElement extends Components.SliderInput, HTMLStencilElement {
     }
     var HTMLSliderInputElement: {
@@ -112,6 +122,7 @@ declare global {
         "grid-tab": HTMLGridTabElement;
         "portrait-image": HTMLPortraitImageElement;
         "portrait-settings": HTMLPortraitSettingsElement;
+        "radio-button-input": HTMLRadioButtonInputElement;
         "slider-input": HTMLSliderInputElement;
         "weave-input": HTMLWeaveInputElement;
         "weave-tab": HTMLWeaveTabElement;
@@ -140,9 +151,13 @@ declare namespace LocalJSX {
         "onOn_color_list_toggle"?: (event: CustomEvent<any>) => void;
         "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
+    interface RadioButtonInput {
+        "button_group_data"?: string[];
+        "button_group_title"?: string;
+        "onButtonSelect"?: Function;
+    }
     interface SliderInput {
-        "onSliderValueChange"?: Function;
-        "slider_id"?: string;
+        "onValueChange"?: Function;
         "slider_init"?: number;
         "slider_max"?: number;
         "slider_min"?: number;
@@ -162,6 +177,7 @@ declare namespace LocalJSX {
         "grid-tab": GridTab;
         "portrait-image": PortraitImage;
         "portrait-settings": PortraitSettings;
+        "radio-button-input": RadioButtonInput;
         "slider-input": SliderInput;
         "weave-input": WeaveInput;
         "weave-tab": WeaveTab;
@@ -179,6 +195,7 @@ declare module "@stencil/core" {
             "grid-tab": LocalJSX.GridTab & JSXBase.HTMLAttributes<HTMLGridTabElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;
             "portrait-settings": LocalJSX.PortraitSettings & JSXBase.HTMLAttributes<HTMLPortraitSettingsElement>;
+            "radio-button-input": LocalJSX.RadioButtonInput & JSXBase.HTMLAttributes<HTMLRadioButtonInputElement>;
             "slider-input": LocalJSX.SliderInput & JSXBase.HTMLAttributes<HTMLSliderInputElement>;
             "weave-input": LocalJSX.WeaveInput & JSXBase.HTMLAttributes<HTMLWeaveInputElement>;
             "weave-tab": LocalJSX.WeaveTab & JSXBase.HTMLAttributes<HTMLWeaveTabElement>;

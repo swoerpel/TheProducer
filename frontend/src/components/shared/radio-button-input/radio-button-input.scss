@@ -1,0 +1,68 @@
+
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-container{
+    display: flex;
+    height: 24px;
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.header-container{
+    background-color: black;
+    flex-grow: 2;
+    padding-left: 8px;
+    min-width: 100px;
+}
+
+.header{
+    font-size: large;
+    font-weight: 600;
+    color: white;
+}
+
+.button-group{
+    background-color: black;
+    flex-grow: 4;
+    justify-content: space-around;
+    
+}
+
+.button-group {
+    justify-content: flex-start;
+    display: flex;
+    cursor: pointer;
+    float: left;
+    padding-right: 6px;
+}
+
+button{
+    width: 100%;
+    font-size: 16;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-decoration: none;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+    outline: none;
+    cursor: pointer;
+}
+
+.selected{
+    background-color: darkorange;
+    color:white;
+}
+
+.unselected{
+    background-color: white;
+    color:black;
+}
+  
+.unselected:hover {
+    background-color: darkorange;
+    color:white;
+}

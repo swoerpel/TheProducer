@@ -10,26 +10,50 @@ export class ParentComponent{
     sliderA(event){
         console.log('SA', event.value)
     }
-    sliderB(event){
-        console.log('SB', event.value)
+
+    buttonGroupA(event){
+        console.log('BGA',event)
     }
-    sliderC(event){
-        console.log('SC', event.value)
-    }
+
+    buttonGroup = [
+        'this',
+        'that',
+        'these',
+        'those'
+    ]
 
     render(){
         return (
             <div class='container'>
-                <slider-input onSliderValueChange={(event) => this.sliderA(event)} 
-                              slider_title={'S1'}
-                              slider_id={'slider_A'} ></slider-input>
-                <slider-input onSliderValueChange={(event) => this.sliderB(event)} 
-                              slider_title={'S2'}
-                              slider_id={'slider_B'} ></slider-input>
-                <slider-input onSliderValueChange={(event) => this.sliderC(event)} 
-                              slider_title={'S3'}
-                              slider_id={'slider_C'} ></slider-input>
+                <slider-input 
+                    slider_title={'Slider Input'}
+                    onValueChange={(event) => this.sliderA(event)}>
+                </slider-input>
+                <slider-input 
+                    slider_title={'Slider Input'}
+                    onValueChange={(event) => this.sliderA(event)}>
+                </slider-input>
+                <slider-input 
+                    slider_title={'Slider Input'}
+                    onValueChange={(event) => this.sliderA(event)}>
+                </slider-input>
+                <radio-button-input 
+                    button_group_title={'Button Group'} 
+                    button_group_data={...this.buttonGroup}
+                    onButtonSelect={(event)=>this.buttonGroupA(event)}>
+                </radio-button-input>
+                <radio-button-input 
+                    button_group_title={'Button Group'} 
+                    button_group_data={...this.buttonGroup}
+                    onButtonSelect={(event)=>this.buttonGroupA(event)}>
+                </radio-button-input>
+                <radio-button-input 
+                    button_group_title={'Button Group'} 
+                    button_group_data={...this.buttonGroup}
+                    onButtonSelect={(event)=>this.buttonGroupA(event)}>
+                </radio-button-input>
             </div>
+
         );
     }
 }
