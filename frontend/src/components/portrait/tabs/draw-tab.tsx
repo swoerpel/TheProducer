@@ -29,24 +29,6 @@ export class ParentComponent{
                     slider_title={'Slider Input'}
                     onValueChange={(event) => this.sliderA(event)}>
                 </slider-input>
-                <slider-input 
-                    slider_title={'Slider Input'}
-                    onValueChange={(event) => this.sliderA(event)}>
-                </slider-input>
-                <slider-input 
-                    slider_title={'Slider Input'}
-                    onValueChange={(event) => this.sliderA(event)}>
-                </slider-input>
-                <radio-button-input 
-                    button_group_title={'Button Group'} 
-                    button_group_data={...this.buttonGroup}
-                    onButtonSelect={(event)=>this.buttonGroupA(event)}>
-                </radio-button-input>
-                <radio-button-input 
-                    button_group_title={'Button Group'} 
-                    button_group_data={...this.buttonGroup}
-                    onButtonSelect={(event)=>this.buttonGroupA(event)}>
-                </radio-button-input>
                 <radio-button-input 
                     button_group_title={'Button Group'} 
                     button_group_data={...this.buttonGroup}
