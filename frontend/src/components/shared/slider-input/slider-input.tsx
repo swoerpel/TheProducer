@@ -1,4 +1,4 @@
-import { Component, h, Prop, State } from "@stencil/core";
+import { Component, h, Prop, State, Event, EventEmitter } from "@stencil/core";
 
 @Component({
     tag: 'slider-input',
@@ -7,32 +7,30 @@ import { Component, h, Prop, State } from "@stencil/core";
 })
 
 export class Slider{
-
-    @Prop() title: string = "default";
+    @Prop() slider_id: string;
+    @Prop() slider_title: string = "default";
+    @Prop() slider_init: number = 50;
     @Prop() slider_min: number = 1;
     @Prop() slider_max: number = 100;
-    @Prop() slider_init: number = 50;
-
+    @Prop() onSliderValueChange: Function;
     @State() slider_value: number = this.slider_init;
 
-    @State() on_slider_value_change
-
-    onValueChange(change){
-        this.slider_value = change.value;
-
+    onValueChange(event){
+        this.slider_value = event.target.value;
+        this.onSliderValueChange(event.target)
     }
-
+    
     render(){
         return (
             <div class='container'>
                 <div class='sub-container header-container'>
-                    <div class='header'>{this.title}</div>
+                    <div class='header'>{this.slider_title}</div>
                 </div>
                 <div class='sub-container value-container'>
                     <input type="text" class='value' value={this.slider_value}></input>
                 </div>
                 <div class='sub-container slider-container'>
-                    <input  onInput={(event) => this.onValueChange(event.target)} 
+                    <input  onInput={(event) => this.onValueChange(event)} 
                             type="range" 
                             min={this.slider_min} 
                             max={this.slider_max} 

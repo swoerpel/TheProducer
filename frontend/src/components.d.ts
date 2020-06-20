@@ -24,10 +24,12 @@ export namespace Components {
     interface PortraitSettings {
     }
     interface SliderInput {
+        "onSliderValueChange": Function;
+        "slider_id": string;
         "slider_init": number;
         "slider_max": number;
         "slider_min": number;
-        "title": string;
+        "slider_title": string;
     }
     interface WeaveInput {
     }
@@ -139,10 +141,12 @@ declare namespace LocalJSX {
         "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
     interface SliderInput {
+        "onSliderValueChange"?: Function;
+        "slider_id"?: string;
         "slider_init"?: number;
         "slider_max"?: number;
         "slider_min"?: number;
-        "title"?: string;
+        "slider_title"?: string;
     }
     interface WeaveInput {
         "onOn_weave_input_change"?: (event: CustomEvent<any>) => void;
