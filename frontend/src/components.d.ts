@@ -14,6 +14,11 @@ export namespace Components {
     }
     interface DrawTab {
     }
+    interface DropdownInput {
+        "dropdown_data": string[];
+        "dropdown_title": string;
+        "onDropdownSelect": Function;
+    }
     interface GridSizeInput {
     }
     interface GridTab {
@@ -64,6 +69,12 @@ declare global {
     var HTMLDrawTabElement: {
         prototype: HTMLDrawTabElement;
         new (): HTMLDrawTabElement;
+    };
+    interface HTMLDropdownInputElement extends Components.DropdownInput, HTMLStencilElement {
+    }
+    var HTMLDropdownInputElement: {
+        prototype: HTMLDropdownInputElement;
+        new (): HTMLDropdownInputElement;
     };
     interface HTMLGridSizeInputElement extends Components.GridSizeInput, HTMLStencilElement {
     }
@@ -118,6 +129,7 @@ declare global {
         "app-root": HTMLAppRootElement;
         "color-palette-input": HTMLColorPaletteInputElement;
         "draw-tab": HTMLDrawTabElement;
+        "dropdown-input": HTMLDropdownInputElement;
         "grid-size-input": HTMLGridSizeInputElement;
         "grid-tab": HTMLGridTabElement;
         "portrait-image": HTMLPortraitImageElement;
@@ -137,6 +149,11 @@ declare namespace LocalJSX {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
     }
     interface DrawTab {
+    }
+    interface DropdownInput {
+        "dropdown_data"?: string[];
+        "dropdown_title"?: string;
+        "onDropdownSelect"?: Function;
     }
     interface GridSizeInput {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
@@ -173,6 +190,7 @@ declare namespace LocalJSX {
         "app-root": AppRoot;
         "color-palette-input": ColorPaletteInput;
         "draw-tab": DrawTab;
+        "dropdown-input": DropdownInput;
         "grid-size-input": GridSizeInput;
         "grid-tab": GridTab;
         "portrait-image": PortraitImage;
@@ -191,6 +209,7 @@ declare module "@stencil/core" {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "color-palette-input": LocalJSX.ColorPaletteInput & JSXBase.HTMLAttributes<HTMLColorPaletteInputElement>;
             "draw-tab": LocalJSX.DrawTab & JSXBase.HTMLAttributes<HTMLDrawTabElement>;
+            "dropdown-input": LocalJSX.DropdownInput & JSXBase.HTMLAttributes<HTMLDropdownInputElement>;
             "grid-size-input": LocalJSX.GridSizeInput & JSXBase.HTMLAttributes<HTMLGridSizeInputElement>;
             "grid-tab": LocalJSX.GridTab & JSXBase.HTMLAttributes<HTMLGridTabElement>;
             "portrait-image": LocalJSX.PortraitImage & JSXBase.HTMLAttributes<HTMLPortraitImageElement>;

@@ -15,11 +15,24 @@ export class ParentComponent{
         console.log('BGA',event)
     }
 
+    dropdownListA(event){
+        console.log('dropdown list', event)
+    }
+
     buttonGroup = [
         'this',
         'that',
         'these',
-        'those'
+    ]
+
+    dropdownItems = [
+        'chet',
+        'dave',
+        'dreyfus',
+        'chris',
+        'john',
+        'bentley',
+        'phil'
     ]
 
     render(){
@@ -34,6 +47,11 @@ export class ParentComponent{
                     button_group_data={...this.buttonGroup}
                     onButtonSelect={(event)=>this.buttonGroupA(event)}>
                 </radio-button-input>
+                <dropdown-input
+                    dropdown_title={'Dropdown Menu'}
+                    dropdown_data={...this.dropdownItems}
+                    onDropdownSelect={(event)=>this.dropdownListA(event)}>
+                </dropdown-input>
             </div>
 
         );
