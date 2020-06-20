@@ -14,21 +14,16 @@
 
 .header-container{
     background-color: black;
-    flex-grow: 2;
+    flex-grow: 1;
     padding-left: 8px;
     min-width: 100px;
-}
-
-.value-container{
-    background-color: olive;
-    flex: 1;
-    justify-content: center;
 }
 
 .dropdown-container{
     background-color: black;
     flex-grow: 4;
     justify-content: flex-start;
+    padding-right: 6px;
 }
 
 .header{
@@ -37,18 +32,50 @@
     color: white;
 }
 
-
-.dropdown{
-    width: 100%;
+.dropbtn {
+    display:flex;
+    flex-grow: 1;
     height: 24px;
-    outline: none;
-    border: none;
-    margin-right:6px;
+    align-items: center;
+    justify-content: center;
     background-color: darkorange;
     color: white;
-}
-
-.dropdown-option{
-    background-color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: darkorange;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
     color: black;
+    padding: 4px 4px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  
+  /* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+      background-color: darkorange;
+      color:white;
 }
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
