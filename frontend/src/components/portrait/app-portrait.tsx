@@ -13,7 +13,7 @@ export class AppPortrait {
   constructor() {
   }
 
-  @Listen('refresh_params')
+  @Listen('on_update_user_input_params')
   refreshImageParams(event: CustomEvent<any> = null){
     this.image_params = knightTrapWeaveService.convertParams(event.detail);
   }

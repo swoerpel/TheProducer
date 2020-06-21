@@ -61,10 +61,10 @@ class Weave {
             let row = [];
             for (let j = 0; j < this.params.grid.rows; j++) {
                 let value;
-                if (this.params.grid.random) {
+                if (this.params.grid.population === 'Random') {
                     value = Math.floor(Math.random() * this.params.grid.max_value);
                 }
-                else {
+                else if (this.params.grid.population === 'Ordered') {
                     value = this.cell_count % this.params.grid.max_value;
                 }
                 row.push({

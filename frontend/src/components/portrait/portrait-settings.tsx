@@ -14,23 +14,13 @@ export class PortraitSettings {
 
   constructor(){}
   
-  private default_user_input = {
-    grid_size_index:0,
-    color_palette: 'Spectral',
-    weave:{
-      width:{
-        low: 25,
-        high: 100,
-        divisions: 3,
-      }
-    }
-  }
+  private default_user_input = {}
 
   @State() user_input_params = this.default_user_input
   @State() grid_size_index: number = 0;
   @State() color_palette: string = 'Spectral';
 
-  @Event() refresh_params: EventEmitter<Object>;
+  @Event() on_update_user_input_params: EventEmitter<Object>;
   @Event() on_color_list_toggle  : EventEmitter;
 
   private tab_ids: string[] = [
@@ -42,28 +32,18 @@ export class PortraitSettings {
   ]
 
   componentDidLoad() {
-    this.refresh_params.emit(this.user_input_params)
+    // this.on_update_user_input_params.emit(this.user_input_params)
   }
 
-  handleRefreshParams(e) {
-    e.preventDefault();
-    this.refresh_params.emit(this.user_input_params)
+  @Listen('on_grid_input_change')
+  handleGridInputChange(grid_params){
+    console.log('params',grid_params.detail)
+    this.user_input_params = {
+      ...this.user_input_params,
+      grid: {...grid_params.detail}
+    }
   }
 
-  @Listen('on_grid_size_select')  
-  setGridSize(event){
-    this.user_input_params.grid_size_index = event.detail;
-  }
-
-  @Listen('on_palette_select')
-  setColorPalette(event){
-    this.user_input_params.color_palette = event.detail;
-  }
-
-  @Listen('on_weave_input_change')
-  setWeaveInput(event){
-    this.user_input_params.weave = event.detail;
-  }
 
   onTabSelect(selected_tab,tab_id) {
     this.tab_ids.filter((id) => id !== tab_id).forEach((tab_id) => { 
@@ -79,6 +59,11 @@ export class PortraitSettings {
     selected_tab.classList.remove('unselected')
     selected_tab.classList.remove('unselected:hover')
     selected_tab.classList.add('selected')
+  }
+
+  updateUserInputParams(e){
+    e.preventDefault();
+    this.on_update_user_input_params.emit(this.user_input_params)
   }
 
   render() {
@@ -98,7 +83,7 @@ export class PortraitSettings {
           <div id="weave" class="nav-tab-content"><weave-tab></weave-tab></div>
           <div id="knight" class="nav-tab-content">Knight</div>
           <div id="color" class="nav-tab-content">Color</div>
-          <input class="refresh-button" type="submit" value="Submit" />
+          <input onClick={(event)=>this.updateUserInputParams(event)} class="refresh-button" type="submit" value="Submit" />
         </div>
       </div>
     );

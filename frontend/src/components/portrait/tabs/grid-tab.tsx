@@ -1,4 +1,5 @@
-import { Component, h} from "@stencil/core";
+import { Component, h, State,Event} from "@stencil/core";
+import { EventEmitter } from "@stencil/router/dist/types/stencil.core";
 
 @Component({
     tag: 'grid-tab',
@@ -7,6 +8,7 @@ import { Component, h} from "@stencil/core";
 })
 
 export class GridTab{
+
 
     row_input_data = {
         title: 'Rows',
@@ -37,17 +39,48 @@ export class GridTab{
         ]
     }
 
-    private handleRowInput(event){
-        console.log('row input',event.value)
+    @Event() on_grid_input_change: EventEmitter<any>;
+
+    @State() input_values = {
+        rows: this.row_input_data.init,
+        cols: this.column_input_data.init,
+        density: this.density_input_data.init,
+        population: this.population_input_data.items[0],
     }
-    private handleColumnInput(event){
-        console.log('column input',event.value)
+
+    componentShouldUpdate() {
+        this.on_grid_input_change.emit(this.input_values)
     }
-    private handleDensityInput(event){
-        console.log('density input',event.value)
+
+    componentWillLoad() {
+        this.on_grid_input_change.emit(this.input_values)
     }
-    private handlePopulationInput(event){
-        console.log('population input',event.value)
+
+    private handleRowInput(value){
+        this.input_values = {
+            ...this.input_values,
+            rows: value,
+        }    
+    }
+
+    private handleColumnInput(value){
+        this.input_values = {
+            ...this.input_values,
+            cols: value,
+        }
+    }
+
+    private handleDensityInput(value){
+        this.input_values = {
+            ...this.input_values,
+            density: value,
+        }
+    }
+    private handlePopulationInput(value){
+        this.input_values = {
+            ...this.input_values,
+            population: value,
+        }
     }
 
     render(){

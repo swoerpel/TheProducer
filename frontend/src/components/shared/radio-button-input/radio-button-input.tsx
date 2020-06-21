@@ -28,7 +28,7 @@ export class RadioButtonInput{
         selected_button.classList.remove('unselected:hover')
         selected_button.classList.add('selected')
         this.button_index = button_index
-        this.onValueChange(this.data[button_index])
+        this.onValueChange(this.data.items[button_index])
     }
     
     render(){

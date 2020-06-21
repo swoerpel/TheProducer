@@ -13,7 +13,7 @@ export class SliderInput{
 
     onInput(event){
         this.slider_value = event.target.value;
-        this.onValueChange(event.target)
+        this.onValueChange(event.target.value)
     }
     
     render(){

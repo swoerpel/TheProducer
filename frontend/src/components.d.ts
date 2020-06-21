@@ -153,13 +153,14 @@ declare namespace LocalJSX {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
     }
     interface GridTab {
+        "onOn_grid_input_change"?: (event: CustomEvent<any>) => void;
     }
     interface PortraitImage {
         "simulation_params"?: any;
     }
     interface PortraitSettings {
         "onOn_color_list_toggle"?: (event: CustomEvent<any>) => void;
-        "onRefresh_params"?: (event: CustomEvent<Object>) => void;
+        "onOn_update_user_input_params"?: (event: CustomEvent<Object>) => void;
     }
     interface RadioButtonInput {
         "data"?: {title:string, items: string[]};

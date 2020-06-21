@@ -25,7 +25,7 @@ class KnightTrapWeaveService {
             "max_value": 4,
             "max_value_step": 1,
             "increment_max_value": true,
-            "random": true
+            "population": 'Ordered'
         },
         weave:{
             "queue_length": 5,
@@ -83,31 +83,32 @@ class KnightTrapWeaveService {
 
     // converts user input params to api request params
     convertParams(user_params:any){
-        // console.log('user_params',user_params,)
+        console.log('user_params',user_params,)
         // console.log('this.default_params.weave',this.default_params.weave)
         // if(!user_params.weave)
         
         const params = {};
-        params['trap_count'] = this.default_params.trap_count
+        params['trap_count'] = user_params.grid.density;
         params['canvas'] = {
             ...this.default_params.canvas
         }
         params['grid'] = {
             ...this.default_params.grid,
-            rows: this.grid_sizes[user_params.grid_size_index].rows,
-            cols: this.grid_sizes[user_params.grid_size_index].rows,
+            rows: user_params.grid.rows,
+            cols:  user_params.grid.cols,
+            population: user_params.grid.population,
         }
         params['knight'] = {
             ...this.default_params.knight
         }
         params['weave'] = {
             ...this.default_params.weave,
-            width: this.convertWeaveParams(user_params.weave)
+            // width: this.convertWeaveParams(user_params.weave)
             // width: setWeaveWidth(user_params.width_count)
         }
         params['color']= {
             ...this.default_params.color,
-            palette: user_params.color_palette,
+            // palette: user_params.color_palette,
         }
         return params;
     }
