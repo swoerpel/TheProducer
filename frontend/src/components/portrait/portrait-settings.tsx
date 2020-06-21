@@ -67,15 +67,18 @@ export class PortraitSettings {
 
   onTabSelect(selected_tab,tab_id) {
     this.tab_ids.filter((id) => id !== tab_id).forEach((tab_id) => { 
-      let tab_element = this.host.shadowRoot.getElementById(tab_id + '-tab')
-      tab_element.style['background-color'] = 'black';
-      tab_element.style['color'] = 'white';
-      let tab_content_element = this.host.shadowRoot.getElementById(tab_id);
-      tab_content_element.style.display = "none"
+      let unselected_tab = this.host.shadowRoot.getElementById(tab_id + '-tab');
+      unselected_tab.classList.remove('selected')
+      unselected_tab.classList.add('unselected')
+      unselected_tab.classList.add('unselected:hover')
+      let unselected_tab_content = this.host.shadowRoot.getElementById(tab_id)
+      unselected_tab_content.style.display = "none"
     })
-    this.host.shadowRoot.getElementById(tab_id).style.display = "flex";
-    selected_tab.style['background-color'] = '#ddd';
-    selected_tab.style['color'] = 'black';
+    let tab_content_element = this.host.shadowRoot.getElementById(tab_id);
+    tab_content_element.style.display = "flex";
+    selected_tab.classList.remove('unselected')
+    selected_tab.classList.remove('unselected:hover')
+    selected_tab.classList.add('selected')
   }
 
   render() {
@@ -83,11 +86,11 @@ export class PortraitSettings {
       <div class="container">
         <div class="header">Image Settings</div>
         <div class="nav-bar">
-          <div id="draw-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'draw')}>Draw</div>
-          <div id="grid-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'grid')}>Grid</div>
-          <div id="weave-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'weave')}>Weave</div>
-          <div id="knight-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'knight')}>Knight</div>
-          <div id="color-tab" class="nav-tab" onClick={(event) => this.onTabSelect(event.target,'color')}>Color</div>
+          <div id="draw-tab" class="nav-tab selected" onClick={(event) => this.onTabSelect(event.target,'draw')}>Draw</div>
+          <div id="grid-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'grid')}>Grid</div>
+          <div id="weave-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'weave')}>Weave</div>
+          <div id="knight-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'knight')}>Knight</div>
+          <div id="color-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'color')}>Color</div>
         </div>
         <div class="content-container">
           <div id="draw" class="nav-tab-content"><draw-tab></draw-tab></div>

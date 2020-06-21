@@ -19,19 +19,28 @@
   display: flex;
   justify-content: center;
   flex: 1;
-  color: white;
+  // color: white;
   text-align: center;
   padding: 8px 8px;
   text-decoration: none;
   font-size: 14px;
 }
 
-.nav-tab:hover{
+.selected{
   background-color: #ddd;
-  // color: black;
-  cursor: pointer;
+  color:black;
 }
 
+.unselected{
+  background-color: black;
+  color:white;
+}
+
+.unselected:hover {
+  background-color: #ddd;
+  color:black;
+  cursor: pointer;
+}
 
 .nav-tab-content {
   display: none;
