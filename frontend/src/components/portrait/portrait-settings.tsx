@@ -104,12 +104,3 @@ export class PortraitSettings {
     );
   }
 }
-
-        // <form class='settings' onSubmit={(e)=>this.handleRefreshParams(e)}>
-          
-        //   <grid-size-input></grid-size-input>
-        //   <color-palette-input></color-palette-input>
-        //   <weave-input></weave-input>
-        //   <input class="refresh-button" type="submit" value="Submit" />
-        // </form>
-        
