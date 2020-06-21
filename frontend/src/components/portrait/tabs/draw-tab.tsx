@@ -19,39 +19,50 @@ export class ParentComponent{
         console.log('dropdown list', event)
     }
 
-    buttonGroup = [
-        'this',
-        'that',
-        'these',
-        'these',
-    ]
+    radio_button_data={
+        title:'Radio Button ',
+        items:[
+            'this',
+            'that',
+            'these',
+            'these',
+        ]
+    }
 
-    dropdownItems = [
-        'chet',
-        'dave',
-        'dreyfus',
-        'chris',
-        'john',
-        'bentley',
-        'phil'
-    ]
+    dropdown_data ={
+        title: 'Dropdown Input',
+        items:[
+            'chet',
+            'dave',
+            'dreyfus',
+            'chris',
+            'john',
+            'bentley',
+            'phil'
+        ],
+    }
+
+    slider_data={
+        min: 1,
+        max:100,
+        init: 50,
+        title: 'Slider Input'
+    }
 
     render(){
         return (
             <div class='container'>
                 <slider-input 
-                    slider_title={'Slider Input'}
+                    data={this.slider_data}
                     onValueChange={(event) => this.sliderA(event)}>
                 </slider-input>
                 <radio-button-input 
-                    button_group_title={'Button Group'} 
-                    button_group_data={...this.buttonGroup}
-                    onButtonSelect={(event)=>this.buttonGroupA(event)}>
+                    data={this.radio_button_data}
+                    onValueChange={(event)=>this.buttonGroupA(event)}>
                 </radio-button-input>
                 <dropdown-input
-                    dropdown_title={'Dropdown Menu'}
-                    dropdown_data={...this.dropdownItems}
-                    onDropdownSelect={(event)=>this.dropdownListA(event)}>
+                    data={this.dropdown_data}
+                    onValueChange={(event)=>this.dropdownListA(event)}>
                 </dropdown-input>
             </div>
 

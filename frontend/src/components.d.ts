@@ -15,9 +15,8 @@ export namespace Components {
     interface DrawTab {
     }
     interface DropdownInput {
-        "dropdown_data": string[];
-        "dropdown_title": string;
-        "onDropdownSelect": Function;
+        "data": {title:string, items: string[]};
+        "onValueChange": Function;
     }
     interface GridSizeInput {
     }
@@ -29,16 +28,12 @@ export namespace Components {
     interface PortraitSettings {
     }
     interface RadioButtonInput {
-        "button_group_data": string[];
-        "button_group_title": string;
-        "onButtonSelect": Function;
+        "data": {title:string, items: string[]};
+        "onValueChange": Function;
     }
     interface SliderInput {
+        "data": {min:number,max:number,init:number,title:string};
         "onValueChange": Function;
-        "slider_init": number;
-        "slider_max": number;
-        "slider_min": number;
-        "slider_title": string;
     }
     interface WeaveInput {
     }
@@ -151,9 +146,8 @@ declare namespace LocalJSX {
     interface DrawTab {
     }
     interface DropdownInput {
-        "dropdown_data"?: string[];
-        "dropdown_title"?: string;
-        "onDropdownSelect"?: Function;
+        "data"?: {title:string, items: string[]};
+        "onValueChange"?: Function;
     }
     interface GridSizeInput {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
@@ -169,16 +163,12 @@ declare namespace LocalJSX {
         "onRefresh_params"?: (event: CustomEvent<Object>) => void;
     }
     interface RadioButtonInput {
-        "button_group_data"?: string[];
-        "button_group_title"?: string;
-        "onButtonSelect"?: Function;
+        "data"?: {title:string, items: string[]};
+        "onValueChange"?: Function;
     }
     interface SliderInput {
+        "data"?: {min:number,max:number,init:number,title:string};
         "onValueChange"?: Function;
-        "slider_init"?: number;
-        "slider_max"?: number;
-        "slider_min"?: number;
-        "slider_title"?: string;
     }
     interface WeaveInput {
         "onOn_weave_input_change"?: (event: CustomEvent<any>) => void;

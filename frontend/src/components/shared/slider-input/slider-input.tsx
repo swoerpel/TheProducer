@@ -7,12 +7,9 @@ import { Component, h, Prop, State } from "@stencil/core";
 })
 
 export class SliderInput{
-    @Prop() slider_title: string = "default";
-    @Prop() slider_init: number = 50;
-    @Prop() slider_min: number = 1;
-    @Prop() slider_max: number = 100;
+    @Prop() data: {min:number,max:number,init:number,title:string};
     @Prop() onValueChange: Function;
-    @State() slider_value: number = this.slider_init;
+    @State() slider_value: number = this.data.init;
 
     onInput(event){
         this.slider_value = event.target.value;
@@ -23,7 +20,7 @@ export class SliderInput{
         return (
             <div class='container'>
                 <div class='sub-container header-container'>
-                    <div class='header'>{this.slider_title}</div>
+                    <div class='header'>{this.data.title}</div>
                 </div>
                 <div class='sub-container value-container'>
                     <input type="text" class='value' value={this.slider_value}></input>
@@ -31,9 +28,9 @@ export class SliderInput{
                 <div class='sub-container slider-container'>
                     <input  onInput={(event) => this.onInput(event)} 
                             type="range" 
-                            min={this.slider_min} 
-                            max={this.slider_max} 
-                            value={this.slider_init} 
+                            min={this.data.min} 
+                            max={this.data.max} 
+                            value={this.data.init} 
                             class="slider" />
                 </div>
             </div>
