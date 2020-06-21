@@ -153,7 +153,6 @@ declare namespace LocalJSX {
         "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
     }
     interface GridTab {
-        "onOn_grid_size_select"?: (event: CustomEvent<number>) => void;
     }
     interface PortraitImage {
         "simulation_params"?: any;
