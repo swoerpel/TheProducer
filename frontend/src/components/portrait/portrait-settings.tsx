@@ -70,13 +70,13 @@ export class PortraitSettings {
     return (
       <div class="container">
         <div class="header">Image Settings</div>
-        <div class="nav-bar">
-          <div id="draw-tab" class="nav-tab selected" onClick={(event) => this.onTabSelect(event.target,'draw')}>Draw</div>
-          <div id="grid-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'grid')}>Grid</div>
-          <div id="weave-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'weave')}>Weave</div>
-          <div id="knight-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'knight')}>Knight</div>
-          <div id="color-tab" class="nav-tab unselected" onClick={(event) => this.onTabSelect(event.target,'color')}>Color</div>
+        <div class="nav-bar">{this.tab_ids.map((id)=>
+          <div onClick={(event) => this.onTabSelect(event.target,id)} 
+               id={`${id}-tab`} 
+               class="nav-tab selected" >{id.charAt(0).toUpperCase() + id.slice(1)}
+          </div>)}
         </div>
+        {/* to implement this with a loop a generic tab component is needed */}
         <div class="content-container">
           <div id="draw" class="nav-tab-content"><draw-tab></draw-tab></div>
           <div id="grid" class="nav-tab-content"><grid-tab></grid-tab></div>
