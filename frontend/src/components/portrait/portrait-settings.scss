@@ -1,5 +1,6 @@
 .container{
   width: 600px;
+  background-color: black;
 }
 
 .header{
@@ -45,11 +46,27 @@
 .nav-tab-content {
   display: none;
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   border-top: none;
 }
 
-.content-container{
-  
+.update-button{
+  border:none;
+  outline:none;
+  width:100%;
+  cursor: pointer;
+  height:60px;
+  border: 2px solid black;
+
+  transition-duration: 0.2;
+  background-color: white;
+  color: black;
+  font-size: var(--input-sub-header-font-size);
+  font-weight: var(--input-sub-header-font-weight);
 }
 
+.update-button:hover{
+  background-color:var(--input-default-color);
+  color:white;
+
+}

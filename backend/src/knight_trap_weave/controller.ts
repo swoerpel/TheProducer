@@ -123,17 +123,6 @@ export class KnightTrapWeave {
           else
             return chroma.scale(['black','white']);
         }
-      }
-    
-    //   randomizeColorMachine = () =>{
-    //     let pals = tome.getAll()
-    //     let rand_palette_key = Math.floor(Math.random() * pals.length)
-    //     let new_pal = pals[rand_palette_key]
-    //     color_machine = chroma.scale(new_pal.colors)
-    //     weave.color_machine = color_machine;
-    //     console.log('new_pal ->', new_pal)
-    //   }
-    
-
+    }
 }
 

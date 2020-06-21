@@ -2,17 +2,6 @@
 class KnightTrapWeaveService {
     param_group: any;
 
-    public grid_sizes = [
-        {rows:4,cols:4},
-        {rows:5,cols:5},
-        {rows:6,cols:6},
-        {rows:7,cols:7},
-        {rows:8,cols:8},
-        {rows:16,cols:16},
-        {rows:32,cols:32},
-    ];
-
-
     public default_params = {
         trap_count: 4,
         canvas: {
@@ -20,8 +9,8 @@ class KnightTrapWeaveService {
             "height": 800
         },
         grid: {
-            "cols": this.grid_sizes[0].cols,
-            "rows": this.grid_sizes[0].rows,
+            "cols": 6,
+            "rows": 6,
             "max_value": 4,
             "max_value_step": 1,
             "increment_max_value": true,
@@ -77,6 +66,13 @@ class KnightTrapWeaveService {
         }
     }
 
+    weaveDrawStyleLUT = {
+        'Smooth':0.25,
+        'Chaotic': 0.978,
+        'Strong': 1,
+        'Weak': 0.499
+    }
+
 
 
     constructor() {}
@@ -99,10 +95,34 @@ class KnightTrapWeaveService {
             population: user_params.grid.population,
         }
         params['knight'] = {
-            ...this.default_params.knight
+            ...this.default_params.knight,
+            init:{
+                ...this.default_params.knight.init,
+                mode: user_params.knight.start_point
+            },
+            jump:{
+                ...this.default_params.knight.jump,
+                x: user_params.knight.jump_x,
+                y: user_params.knight.jump_y,
+            }
         }
         params['weave'] = {
             ...this.default_params.weave,
+            width:{
+                ...this.default_params.weave.width,
+                min: user_params.weave.width.min / 100,
+                max: user_params.weave.width.max / 100,
+                step: this.calculateStep(
+                    user_params.weave.width.min,
+                    user_params.weave.width.max, 
+                    user_params.weave.width.segments
+                ),
+                oss_freq: parseInt(user_params.weave.width.frequency_oss),
+            },
+            smooth:{
+                ...this.default_params.weave.smooth,
+                ratio: this.weaveDrawStyleLUT[user_params.weave.drawing_style]
+            }
             // width: this.convertWeaveParams(user_params.weave)
             // width: setWeaveWidth(user_params.width_count)
         }
@@ -111,6 +131,10 @@ class KnightTrapWeaveService {
             // palette: user_params.color_palette,
         }
         return params;
+    }
+
+    calculateStep(min, max, divs){
+        return ((max - min) / (divs - 1)) / 100
     }
 
     convertWeaveParams(weave_params){

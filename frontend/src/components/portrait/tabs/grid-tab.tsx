@@ -34,8 +34,8 @@ export class GridTab{
     population_input_data = {
         title: 'Population',
         items:[
+            'Random',
             'Ordered',
-            'Random'
         ]
     }
 
