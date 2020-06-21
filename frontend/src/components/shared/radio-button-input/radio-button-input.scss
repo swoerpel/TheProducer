@@ -6,54 +6,48 @@
 
 .sub-container{
     display: flex;
-    height: 24px;
-    align-items: center;
+    height: var(--input-setting-height);
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
 .header-container{
     background-color: black;
-    flex-grow: 2;
-    padding-left: 8px;
-    min-width: 100px;
+    flex-grow: 1;
+    padding-left: var(--input-sub-header-padding-left);
+    min-width: var(--input-sub-header-min-width);
 }
 
 .header{
-    font-size: large;
-    font-weight: 600;
+    font-size: var(--input-sub-header-font-size);
+    font-weight: var(--input-sub-header-font-weight);
     color: white;
 }
 
 .button-group{
     background-color: black;
-    flex-grow: 4;
-    justify-content: space-around;
-    
-}
-
-.button-group {
-    justify-content: flex-start;
-    display: flex;
-    cursor: pointer;
-    float: left;
+    display:flex;
+    flex: 4;
+    align-items: center;
     padding-right: 6px;
 }
 
 button{
-    width: 100%;
-    font-size: 16;
+    display: flex;
+    flex-grow: 2;
+    justify-content: center;
+    font-size: medium;
     padding-top: 4px;
     padding-bottom: 4px;
     text-decoration: none;
-    border: 2px solid black;
+    border: 0px solid black;
     transition-duration: 0.4s;
     outline: none;
     cursor: pointer;
 }
 
 .selected{
-    background-color: darkorange;
+    background-color: var(--input-default-color);
     color:white;
 }
 
@@ -63,6 +57,6 @@ button{
 }
   
 .unselected:hover {
-    background-color: darkorange;
+    background-color: var(--input-default-color);
     color:white;
 }

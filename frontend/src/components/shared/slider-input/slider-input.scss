@@ -8,15 +8,15 @@
     display: flex;
     height: 24px;
     align-items: center;
-    padding-top: 4px;
+    padding-top: 8px;
     padding-bottom: 4px;
 }
 
 .header-container{
     background-color: black;
-    flex-grow: 2;
-    padding-left: 8px;
-    min-width: 100px;
+    flex: 7;
+    padding-left: var(--input-sub-header-padding-left);
+    min-width: var(--input-sub-header-min-width);
 }
 
 .value-container{
@@ -27,20 +27,21 @@
 
 .slider-container{
     background-color: black;
-    flex-grow: 3;
+    flex:11;
     justify-content: center;
 }
 
 .header{
-    font-size: large;
-    font-weight: 600;
+    font-size: var(--input-sub-header-font-size);
+    font-weight: var(--input-sub-header-font-weight);
     color: white;
 }
 
 .value{
-    width: 80%;
-    border-radius: 5px;
-    padding: 2px;
+    width: 100%;
+    border-radius: 0px;
+    padding:0px;
+    height: var(--input-setting-height);
     text-align: center;
     border: none;
 }
@@ -48,7 +49,7 @@
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
-    height: 24px; /* Specified height */
+    height: var(--input-setting-height); /* Specified height */
     outline: none; /* Remove outline */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
@@ -64,9 +65,9 @@
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    width: 24px; /* Set a specific slider handle width */
-    height: 24px; /* Slider handle height */
+    width:var(--input-setting-height); /* Set a specific slider handle width */
+    height:var(--input-setting-height); /* Slider handle height */
     background: black; /* Green background */
     cursor: pointer; /* Cursor on hover */
-    background-color: darkorange;
+    background-color: var(--input-default-color);
 }

@@ -6,7 +6,7 @@
 .section-header{
     font-size: large;
     font-weight: 600;
-    min-width: 100px;
+    min-width: var(--input-sub-header-min-width);
 }
 
 .input-container{

@@ -23,6 +23,7 @@ export class ParentComponent{
         'this',
         'that',
         'these',
+        'these',
     ]
 
     dropdownItems = [

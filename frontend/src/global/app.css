@@ -8,7 +8,7 @@
   Any global CSS variables should also be applied here.
 */
 
-
+/*needed*/
 body {
   margin: 0px;
   padding: 0px;
@@ -17,6 +17,10 @@ body {
 
 :root{
   --input-setting-height: 24px;
-  --default-input-color: darkorange;
+  --input-sub-header-min-width: 120px;
+  --input-sub-header-font-size: medium;
+  --input-sub-header-font-weight: 600;
+  --input-sub-header-padding-left: 8px;
+  --input-default-color: darkorange;
 }
 
