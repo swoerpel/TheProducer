@@ -11,9 +11,9 @@ export class ColorTab{
 
     consistency_input_data = {
         title: 'Consistency',
-        min:1,
-        max: 100,
-        init: 25,
+        min:2,
+        max: 32,
+        init: 6,
     }
 
 

@@ -80,9 +80,6 @@ class KnightTrapWeaveService {
     // converts user input params to api request params
     convertParams(user_params:any){
         console.log('user_params',user_params,)
-        // console.log('this.default_params.weave',this.default_params.weave)
-        // if(!user_params.weave)
-        
         const params = {};
         params['trap_count'] = user_params.grid.density;
         params['canvas'] = {
@@ -128,6 +125,7 @@ class KnightTrapWeaveService {
         }
         params['color']= {
             ...this.default_params.color,
+            domain: user_params.color.consistency,
             // palette: user_params.color_palette,
         }
         return params;
