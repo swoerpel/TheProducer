@@ -9,12 +9,12 @@
     height: 24px;
     align-items: center;
     padding-top: 8px;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
 }
 
 .header-container{
     background-color: black;
-    flex: 7;
+    flex: 1;
     padding-left: var(--input-sub-header-padding-left);
     min-width: var(--input-sub-header-min-width);
 }
@@ -27,7 +27,7 @@
 
 .slider-container{
     background-color: black;
-    flex:11;
+    flex:12;
     justify-content: center;
 }
 

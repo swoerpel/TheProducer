@@ -12,6 +12,10 @@ export namespace Components {
     }
     interface ColorPaletteInput {
     }
+    interface ColorPickerInput {
+        "data": {title:string,init:string};
+        "onValueChange": Function;
+    }
     interface ColorTab {
     }
     interface DrawTab {
@@ -58,6 +62,12 @@ declare global {
     var HTMLColorPaletteInputElement: {
         prototype: HTMLColorPaletteInputElement;
         new (): HTMLColorPaletteInputElement;
+    };
+    interface HTMLColorPickerInputElement extends Components.ColorPickerInput, HTMLStencilElement {
+    }
+    var HTMLColorPickerInputElement: {
+        prototype: HTMLColorPickerInputElement;
+        new (): HTMLColorPickerInputElement;
     };
     interface HTMLColorTabElement extends Components.ColorTab, HTMLStencilElement {
     }
@@ -123,6 +133,7 @@ declare global {
         "app-portrait": HTMLAppPortraitElement;
         "app-root": HTMLAppRootElement;
         "color-palette-input": HTMLColorPaletteInputElement;
+        "color-picker-input": HTMLColorPickerInputElement;
         "color-tab": HTMLColorTabElement;
         "draw-tab": HTMLDrawTabElement;
         "dropdown-input": HTMLDropdownInputElement;
@@ -142,6 +153,10 @@ declare namespace LocalJSX {
     }
     interface ColorPaletteInput {
         "onOn_palette_select"?: (event: CustomEvent<string>) => void;
+    }
+    interface ColorPickerInput {
+        "data"?: {title:string,init:string};
+        "onValueChange"?: Function;
     }
     interface ColorTab {
         "onOn_color_input_change"?: (event: CustomEvent<any>) => void;
@@ -180,6 +195,7 @@ declare namespace LocalJSX {
         "app-portrait": AppPortrait;
         "app-root": AppRoot;
         "color-palette-input": ColorPaletteInput;
+        "color-picker-input": ColorPickerInput;
         "color-tab": ColorTab;
         "draw-tab": DrawTab;
         "dropdown-input": DropdownInput;
@@ -199,6 +215,7 @@ declare module "@stencil/core" {
             "app-portrait": LocalJSX.AppPortrait & JSXBase.HTMLAttributes<HTMLAppPortraitElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "color-palette-input": LocalJSX.ColorPaletteInput & JSXBase.HTMLAttributes<HTMLColorPaletteInputElement>;
+            "color-picker-input": LocalJSX.ColorPickerInput & JSXBase.HTMLAttributes<HTMLColorPickerInputElement>;
             "color-tab": LocalJSX.ColorTab & JSXBase.HTMLAttributes<HTMLColorTabElement>;
             "draw-tab": LocalJSX.DrawTab & JSXBase.HTMLAttributes<HTMLDrawTabElement>;
             "dropdown-input": LocalJSX.DropdownInput & JSXBase.HTMLAttributes<HTMLDropdownInputElement>;

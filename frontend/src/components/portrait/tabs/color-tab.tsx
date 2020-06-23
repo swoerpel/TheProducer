@@ -16,11 +16,17 @@ export class ColorTab{
         init: 6,
     }
 
+    background_color_input_data = {
+        title: 'Background',
+        init: 'white',
+    }
+
 
     @Event() on_color_input_change: EventEmitter<any>;
 
     @State() input_values = {
         consistency: this.consistency_input_data.init,
+        background: this.background_color_input_data.init,
     }
 
     componentShouldUpdate() {
@@ -38,7 +44,13 @@ export class ColorTab{
         }    
     }
 
-  
+    private handleBackgroundColorInput(value){
+        this.input_values = {
+            ...this.input_values,
+            background: value,
+        }    
+    }
+
     render(){
         return (
             <div class='container'>
@@ -46,6 +58,10 @@ export class ColorTab{
                     data={this.consistency_input_data}
                     onValueChange={(event) => this.handleConsistencyInput(event)}>
                 </slider-input>
+                <color-picker-input
+                    data={this.background_color_input_data}
+                    onValueChange={(event) => this.handleBackgroundColorInput(event)}>
+                </color-picker-input>
             </div>
         );
     }
